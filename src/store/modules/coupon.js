@@ -4,7 +4,10 @@ export default {
   state: {
     couponData: [{}],
     couponById: [{}],
-    formIdCoupon: {}
+    formIdCoupon: {},
+    home: 0,
+    dine: 0,
+    take: 0
   },
   mutations: {
     setCoupon(state, payload) {
@@ -13,6 +16,17 @@ export default {
     setCouponById(state, payload) {
       state.CouponById = payload.data
       state.formIdCoupon = payload.data[0]
+      // delivery handling untuk jenis delivery ===================
+      const deliv = payload.data[0].deliver_id
+      if (deliv == 1 || deliv == 4 || deliv == 5 || deliv == 7) {
+        state.home = 1
+      }
+      if (deliv == 2 || deliv == 4 || deliv == 6 || deliv == 7) {
+        state.dine = 1
+      }
+      if (deliv == 3 || deliv == 5 || deliv == 6 || deliv == 7) {
+        state.take = 1
+      }
     }
   },
   actions: {
@@ -147,6 +161,15 @@ export default {
     },
     getFormIdCoupon(state) {
       return state.formIdCoupon
+    },
+    getHomeCoupon(state) {
+      return state.home
+    },
+    getTakeCoupon(state) {
+      return state.take
+    },
+    getDineCoupon(state) {
+      return state.dine
     }
   }
 }

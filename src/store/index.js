@@ -9,9 +9,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: { Auth, Product, Coupon },
-  state: {
-    name: 'Andrawan Erlang Pradana'
-  },
+  state: {},
   mutations: {},
   actions: {},
   getters: {},

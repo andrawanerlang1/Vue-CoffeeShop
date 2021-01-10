@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <LoginComponent />
+      <SignupComponent />
     </div>
     <div>
       <Footer />
@@ -11,13 +11,13 @@
 
 <script>
 import Footer from '../../components/_base/footer'
-import LoginComponent from '../../components/_base/LoginComponent'
+import SignupComponent from '../../components/_base/SignupComponent'
 
 export default {
-  name: 'Login',
+  name: 'Signup',
   components: {
     Footer,
-    LoginComponent
+    SignupComponent
   }
 }
 </script>

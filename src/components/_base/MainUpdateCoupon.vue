@@ -70,7 +70,6 @@
                 class="form-control"
                 placeholder="Coupon Code"
               />
-              {{ form }}
             </div>
           </div>
         </b-col>
@@ -189,16 +188,16 @@ export default {
   data() {
     return {
       coupon_id: '',
-      url: null,
-      home: 0,
-      dine: 0,
-      take: 0
+      url: null
     }
   },
   computed: {
     ...mapGetters({
       coupon: 'getDataCouponById',
-      form: 'getFormIdCoupon'
+      form: 'getFormIdCoupon',
+      home: 'getHomeCoupon',
+      dine: 'getDineCoupon',
+      take: 'getTakeCoupon'
     })
   },
   created() {
@@ -207,7 +206,13 @@ export default {
   },
   methods: {
     ...mapActions(['getCouponsById', 'updateCoupons']),
-    ...mapGetters(['getDataCouponById', 'getFormIdCoupon']),
+    ...mapGetters([
+      'getDataCouponById',
+      'getFormIdCoupon',
+      'getHomeCoupon',
+      'getDineCoupon',
+      'getTakeCoupon'
+    ]),
 
     chooseFile() {
       document.getElementById('formInputImage').click()
@@ -224,17 +229,6 @@ export default {
     },
     getCouponById() {
       this.getCouponsById(this.coupon_id)
-      // deliver handling ===================
-      const deliv = this.form.deliver_id
-      if (deliv == 1 || deliv == 4 || deliv == 5 || deliv == 7) {
-        this.home = 1
-      }
-      if (deliv == 2 || deliv == 4 || deliv == 6 || deliv == 7) {
-        this.dine = 1
-      }
-      if (deliv == 3 || deliv == 5 || deliv == 6 || deliv == 7) {
-        this.take = 1
-      }
     },
     updateCoupon() {
       const discount = parseInt(this.form.coupon_discount)

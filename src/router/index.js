@@ -12,6 +12,7 @@ import History from '../views/history.vue'
 import Update from '../views/update.vue'
 import UpdateCoupon from '../views/updateCoupon.vue'
 import Login from '../views/auth/Login.vue'
+import Signup from '../views/auth/Signup.vue'
 import store from '../store'
 
 Vue.use(VueRouter)
@@ -32,6 +33,12 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
+    meta: { requiresVisitor: true }
+  },
+  {
+    path: '/signup',
+    name: 'Signup',
+    component: Signup,
     meta: { requiresVisitor: true }
   },
   {

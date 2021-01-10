@@ -22,9 +22,21 @@ export default {
         axios
           .post(`http://${process.env.VUE_APP_URL}/user/login`, payload)
           .then(result => {
-            // console.log(result)
             context.commit('setUser', result.data.data)
             localStorage.setItem('token', result.data.data.token)
+            resolve(result)
+          })
+          .catch(error => {
+            reject(error.response)
+          })
+      })
+    },
+    register(context, payload) {
+      console.log(context)
+      return new Promise((resolve, reject) => {
+        axios
+          .post(`http://${process.env.VUE_APP_URL}/user/register`, payload)
+          .then(result => {
             resolve(result)
           })
           .catch(error => {

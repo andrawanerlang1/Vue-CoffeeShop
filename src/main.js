@@ -5,11 +5,20 @@ import store from './store'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import Toasted from 'vue-toasted'
 
-// Install BootstrapVue
 Vue.use(BootstrapVue)
-// Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
+Vue.use(Toasted, {
+  duration: 10000,
+  position: 'top-right',
+  action: {
+    text: 'Close',
+    onClick: (e, toastObject) => {
+      toastObject.goAway(0)
+    }
+  }
+})
 
 Vue.config.productionTip = false
 
