@@ -41,9 +41,9 @@
             <a href="url"><img src="@/assets/chat.png"/></a>
           </b-col>
           <b-col>
-            <a href="profile.html"
-              ><img src="@/assets/prof.png" style="border-radius: 50%;"
-            /></a>
+            <div id="editProfile" @click="editProfile(user.user_id)">
+              <img src="@/assets/prof.png" style="border-radius: 50%;" />
+            </div>
           </b-col>
         </b-row>
         <div id="logout">
@@ -55,26 +55,40 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Navbar',
+  data() {
+    return {
+      user_id: ''
+    }
+  },
+  computed: {
+    ...mapGetters({ user: 'setUser' })
+  },
   methods: {
     ...mapActions(['logout']),
     handleLogout() {
       this.logout()
+    },
+    editProfile(user_id) {
+      this.$router.push({ name: 'EditProfile', params: { id: user_id } })
     }
   }
 }
 </script>
 
 <style scoped>
+#editProfile img:hover {
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2),
+    2px 2px 2px 2px rgba(0, 0, 0, 0.19);
+}
 #logout {
   text-align: center;
 }
 #logout button {
   background-color: wheat;
   font-family: Georgia, 'Times New Roman', Times, serif;
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 4px 0 rgba(0, 0, 0, 0.19);
   font-size: 12px;
   border-radius: 12px;
   margin-top: 10px;

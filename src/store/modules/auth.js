@@ -11,6 +11,9 @@ export default {
       state.user = payload
       state.token = payload.token
     },
+    setUserById(state, payload) {
+      state.user = payload
+    },
     delUser(state) {
       state.user = ''
       state.token = null
@@ -24,6 +27,20 @@ export default {
           .then(result => {
             context.commit('setUser', result.data.data)
             localStorage.setItem('token', result.data.data.token)
+            resolve(result)
+          })
+          .catch(error => {
+            reject(error.response)
+          })
+      })
+    },
+    getUserByIds(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`http://${process.env.VUE_APP_URL}/user/${payload}`)
+          .then(result => {
+            context.commit('setUserById', result.data.data[0])
+            console.log(result)
             resolve(result)
           })
           .catch(error => {
