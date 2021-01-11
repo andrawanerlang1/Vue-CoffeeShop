@@ -89,6 +89,7 @@ export default {
   background-color: white;
   padding: 20px;
   border-bottom: lightgray solid 3px;
+  z-index: 1;
 }
 #header-logo {
   font-weight: bold;

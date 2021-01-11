@@ -190,6 +190,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import toastMixins from '../../mixins/toastMixins'
 
 export default {
   data() {
@@ -201,6 +202,7 @@ export default {
       url: null
     }
   },
+  mixins: [toastMixins],
   computed: {
     ...mapGetters({
       products: 'getDataProductById',
@@ -234,7 +236,11 @@ export default {
       this.url = URL.createObjectURL(event.target.files[0])
       const type = event.target.files[0].type
       if (type != 'image/jpeg' && type != 'image/png' && type != 'image/jpg') {
-        return this.toast3('b-toaster-top-full')
+        return this.toastMixins(
+          'Image must be jpeg / png',
+          'danger',
+          'attention!!'
+        )
       }
     },
     chooseFile() {
@@ -259,32 +265,15 @@ export default {
         !this.form.deliver_id ||
         !this.form.product_image
       ) {
-        return this.toast2('b-toaster-top-full')
+        return this.toastMixins('Please input all data', 'warning', 'Warning!!')
       } else {
         const param = { form: this.form, id: this.product_id }
         this.updateProduct(param)
-        this.toast1('b-toaster-top-full')
+        this.toastMixins('Product Updated', 'success', 'Success!!')
         this.$router.go()
       }
     },
-    toast1(toaster, append = false) {
-      this.$bvToast.toast('Product Updated', {
-        title: 'Success',
-        toaster: toaster,
-        solid: true,
-        variant: 'success',
-        appendToast: append
-      })
-    },
-    toast2(toaster, append = false) {
-      this.$bvToast.toast('Please input all data', {
-        title: 'Warning',
-        toaster: toaster,
-        solid: true,
-        variant: 'warning',
-        appendToast: append
-      })
-    },
+
     deliver(param) {
       if (param == 1) {
         if (this.home == 0) {

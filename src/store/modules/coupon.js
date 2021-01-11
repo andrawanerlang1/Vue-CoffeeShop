@@ -27,6 +27,29 @@ export default {
       if (deliv == 3 || deliv == 5 || deliv == 6 || deliv == 7) {
         state.take = 1
       }
+    },
+    deliverState(state, payload) {
+      if (payload == 1) {
+        if (state.home == 0) {
+          state.home = 1
+        } else {
+          state.home = 0
+        }
+      } else if (payload == 2) {
+        if (state.dine == 0) {
+          state.dine = 1
+        } else {
+          state.dine = 0
+        }
+      } else if (payload == 3) {
+        if (state.take == 0) {
+          state.take = 1
+        } else {
+          state.take = 0
+        }
+      } else {
+        console.log(payload)
+      }
     }
   },
   actions: {
@@ -150,6 +173,9 @@ export default {
             reject(error)
           })
       })
+    },
+    delivers(context, payload) {
+      return context.commit('deliverState', payload)
     }
   },
   getters: {

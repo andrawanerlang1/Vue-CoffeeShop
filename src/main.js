@@ -9,6 +9,7 @@ import Toasted from 'vue-toasted'
 
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
+//vue toaster
 Vue.use(Toasted, {
   duration: 10000,
   position: 'top-right',
@@ -17,6 +18,12 @@ Vue.use(Toasted, {
     onClick: (e, toastObject) => {
       toastObject.goAway(0)
     }
+  }
+})
+//vue directive
+Vue.directive('color', {
+  bind(el, binding) {
+    el.style.color = binding.value
   }
 })
 

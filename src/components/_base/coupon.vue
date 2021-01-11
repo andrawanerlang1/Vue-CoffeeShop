@@ -1,6 +1,6 @@
 <template>
   <div class="main-promo">
-    <div class="line1">
+    <div v-color="'#6A4029'" class="line1">
       Promo For You <br />
       {{ user.user_name }}
     </div>
@@ -18,7 +18,7 @@
               <img
                 :src="
                   !couponData[couponArr].coupon_image
-                    ? 'http://localhost:3000/product/cold.png'
+                    ? require('../../assets/rice.png')
                     : 'http://localhost:3000/coupon/' +
                       couponData[couponArr].coupon_image
                 "

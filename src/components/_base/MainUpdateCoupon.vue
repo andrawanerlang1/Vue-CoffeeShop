@@ -183,6 +183,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import toastMixins from '../../mixins/toastMixins'
 
 export default {
   data() {
@@ -191,6 +192,7 @@ export default {
       url: null
     }
   },
+  mixins: [toastMixins],
   computed: {
     ...mapGetters({
       coupon: 'getDataCouponById',
@@ -205,7 +207,7 @@ export default {
     this.getCouponById()
   },
   methods: {
-    ...mapActions(['getCouponsById', 'updateCoupons']),
+    ...mapActions(['getCouponsById', 'updateCoupons', 'delivers']),
     ...mapGetters([
       'getDataCouponById',
       'getFormIdCoupon',
@@ -224,7 +226,11 @@ export default {
       )
       const type = event.target.files[0].type
       if (type != 'image/jpeg' && type != 'image/png' && type != 'image/jpg') {
-        return this.toast3('b-toaster-top-full')
+        return this.toastMixins(
+          'Image must be jpeg / png',
+          'danger',
+          'attention!!'
+        )
       }
     },
     getCouponById() {
@@ -242,65 +248,22 @@ export default {
         !this.form.deliver_id ||
         !this.form.coupon_image
       ) {
-        return this.toast2('b-toaster-top-full')
+        return this.toastMixins('Please input all data', 'warning', 'Warning!!')
       } else if (discount > 99) {
-        this.toast3('b-toaster-top-full')
+        this.toastMixins(
+          'Coupon discount (%) cant exceed 99%',
+          'warning',
+          'Warning!!'
+        )
       } else {
         const param = { form: this.form, id: this.coupon_id }
         this.updateCoupons(param)
-        this.toast1('b-toaster-top-full')
+        this.toastMixins('Coupon Updated', 'success', 'Success!!')
         this.$router.go()
       }
     },
-    toast1(toaster, append = false) {
-      this.$bvToast.toast('Coupon Updated', {
-        title: 'Success',
-        toaster: toaster,
-        solid: true,
-        variant: 'success',
-        appendToast: append
-      })
-    },
-    toast2(toaster, append = false) {
-      this.$bvToast.toast('Please input all data', {
-        title: 'Warning',
-        toaster: toaster,
-        solid: true,
-        variant: 'warning',
-        appendToast: append
-      })
-    },
-    toast3(toaster, append = false) {
-      this.$bvToast.toast('Coupon discount (%) cant exceed 99%', {
-        title: 'Warning',
-        toaster: toaster,
-        solid: true,
-        variant: 'warning',
-        appendToast: append
-      })
-    },
     deliver(param) {
-      if (param == 1) {
-        if (this.home == 0) {
-          this.home = 1
-        } else {
-          this.home = 0
-        }
-      } else if (param == 2) {
-        if (this.dine == 0) {
-          this.dine = 1
-        } else {
-          this.dine = 0
-        }
-      } else if (param == 3) {
-        if (this.take == 0) {
-          this.take = 1
-        } else {
-          this.take = 0
-        }
-      } else {
-        console.log(param)
-      }
+      this.delivers(param)
       this.calculateDeliver()
     },
     calculateDeliver() {
