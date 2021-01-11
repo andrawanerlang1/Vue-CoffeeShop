@@ -12,16 +12,37 @@
           <button type="button" class="choose">Choose Photo</button>
           <button type="button" class="remove">Remove Photo</button>
         </div>
-        <button type="button" class="password">Edit Password</button>
+        <button type="button" class="password" @click="showModal">
+          Edit Password
+        </button>
+        <b-modal ref="my-modal" hide-footer title="Input New Password">
+          <b-form-input
+            type="text"
+            placeholder="Input your new password"
+          ></b-form-input>
+          <b-button class="mt-3" variant="outline-danger" block
+            >Confirm new password</b-button
+          >
+          <b-button
+            class="mt-2"
+            variant="outline-warning"
+            block
+            @click="hideModal"
+            >Cancel</b-button
+          >
+        </b-modal>
         <div class="change">
           <div class="text">Do you want to save the change?</div>
-          <button type="button" class="savechange">Save Change</button>
-          <button type="button" class="cancel">Cancel</button>
+          <button @click="updateUser" type="button" class="savechange">
+            Save Change
+          </button>
+          <button @click="getUserById" type="button" class="cancel">
+            Cancel
+          </button>
         </div>
         <div class="logout">
           <button type="button">Log Out</button>
         </div>
-        {{ user }}
       </div>
       <div class="kanan">
         <!-- <div class="sunting">
@@ -75,7 +96,7 @@
                 <div>
                   <b-form-input
                     type="text"
-                    v-model="user.display_name"
+                    v-model="user.user_display_name"
                     placeholder="your name here.."
                   ></b-form-input>
                 </div>
@@ -149,11 +170,13 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import toastMixins from '../../mixins/toastMixins'
 
 export default {
   data() {
     return {}
   },
+  mixins: [toastMixins],
   mounted() {
     this.getUserById()
   },
@@ -164,9 +187,19 @@ export default {
   },
   methods: {
     ...mapGetters(['setUser']),
-    ...mapActions(['getUserByIds']),
+    ...mapActions(['getUserByIds', 'updateUsers']),
     getUserById() {
       this.getUserByIds(this.user.user_id)
+    },
+    updateUser() {
+      this.updateUsers(this.user)
+      this.toastMixins('Profile Updated', 'success', 'Success!!')
+    },
+    showModal() {
+      this.$refs['my-modal'].show()
+    },
+    hideModal() {
+      this.$refs['my-modal'].hide()
     }
   }
 }

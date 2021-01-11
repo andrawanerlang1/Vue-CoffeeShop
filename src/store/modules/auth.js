@@ -48,6 +48,22 @@ export default {
           })
       })
     },
+    updateUsers(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .patch(
+            `http://${process.env.VUE_APP_URL}/user/${context.state.user.user_id}`,
+            payload
+          )
+          .then(result => {
+            console.log(result)
+            resolve(result)
+          })
+          .catch(error => {
+            reject(error.response)
+          })
+      })
+    },
     register(context, payload) {
       console.log(context)
       return new Promise((resolve, reject) => {
