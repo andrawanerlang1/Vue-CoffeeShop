@@ -12,7 +12,7 @@
             class="box-main-item"
             v-for="(item, index) in history"
             :key="index"
-            @click="showModal"
+            @click="showModal(item.history_id)"
           >
             <div class="box-main-left">
               <img src="../../assets/veg.png" alt="" />
@@ -33,11 +33,28 @@
             </div>
           </div>
         </div>
-        <b-modal ref="my-modal" hide-footer title="Input New Password">
+        <b-modal ref="my-modal" hide-footer title="History Details">
           <div>
-            History Details:
+            <div id="historyWrap">
+              <div>Product</div>
+              <div>Quantity</div>
+              <div>Total</div>
+            </div>
+            <div
+              id="contentWrap"
+              v-for="(item, index) in historyDetail"
+              :key="index"
+            >
+              <div>{{ item.product_name }}</div>
+              <div>{{ item.history_detail_quantity }}</div>
+              <div>{{ item.history_detail_total }}</div>
+            </div>
           </div>
-          <b-button class="mt-3" variant="outline-danger" block
+          <b-button
+            @click="deleteHistory(activeId)"
+            class="mt-3"
+            variant="outline-danger"
+            block
             >Delete History</b-button
           >
           <b-button
@@ -57,19 +74,32 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'history',
+  data() {
+    return {
+      activeId: null
+    }
+  },
   mounted() {
     this.getHistoryAcc(this.user.user_id)
   },
   computed: {
     ...mapGetters({
       history: 'getHistoryByUserId',
-      user: 'setUser'
+      user: 'setUser',
+      historyDetail: 'getHistoryDetails'
     })
   },
   methods: {
-    ...mapGetters(['getHistoryByUserId', 'setUser']),
-    ...mapActions(['getHistoryAcc']),
-    showModal() {
+    ...mapGetters(['getHistoryByUserId', 'getHistoryDetails', 'setUser']),
+    ...mapActions(['getHistoryAcc', 'getHistoryDetail', 'deleteHistorys']),
+
+    deleteHistory(id) {
+      this.deleteHistorys(id)
+      this.$router.go()
+    },
+    showModal(history_id) {
+      this.getHistoryDetail(history_id)
+      this.activeId = history_id
       this.$refs['my-modal'].show()
     },
     hideModal() {
@@ -84,6 +114,16 @@ main {
   background-image: url('../../assets/bg2.png');
   background-size: cover;
   background-repeat: no-repeat;
+}
+#historyWrap,
+#contentWrap {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+#contentWrap div,
+#historyWrap div {
+  width: 200px;
 }
 main .top-main {
   text-align: center;

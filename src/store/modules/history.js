@@ -3,7 +3,8 @@ import axios from 'axios'
 export default {
   state: {
     historyId: null,
-    historyAcc: []
+    historyAcc: [],
+    historyDetail: {}
   },
   mutations: {
     setHistoryId(state, payload) {
@@ -11,6 +12,9 @@ export default {
     },
     setHistoryAcc(state, payload) {
       state.historyAcc = payload
+    },
+    setHistoryDetail(state, payload) {
+      state.historyDetail = payload
     }
   },
   actions: {
@@ -35,6 +39,7 @@ export default {
         const setData = {
           history_id: context.state.historyId,
           product_id: payload.product_id,
+          product_name: payload.product_name,
           size_choice_id: payload.product_size,
           deliver_id: payload.product_deliver,
           history_detail_quantity: payload.product_qty,
@@ -66,6 +71,36 @@ export default {
             reject(error)
           })
       })
+    },
+    getHistoryDetail(context, payload) {
+      console.log(context)
+      return new Promise((resolve, reject) => {
+        axios
+          .get(
+            `http://${process.env.VUE_APP_URL}/historydetail?history_id=${payload}`
+          )
+          .then(response => {
+            context.commit('setHistoryDetail', response.data.data)
+            resolve(response)
+          })
+          .catch(error => {
+            console.log(error)
+            reject(error)
+          })
+      })
+    },
+    deleteHistorys(context, payload) {
+      console.log(context)
+      return new Promise((resolve, reject) => {
+        axios
+          .delete(`http://${process.env.VUE_APP_URL}/history?id=${payload}`)
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
     }
   },
   getters: {
@@ -74,6 +109,9 @@ export default {
     },
     getHistoryByUserId(state) {
       return state.historyAcc
+    },
+    getHistoryDetails(state) {
+      return state.historyDetail
     }
   }
 }
