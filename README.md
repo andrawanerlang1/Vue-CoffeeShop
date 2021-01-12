@@ -1,29 +1,47 @@
-# coffee-arkademy
+<h1 align='center'>Vue JS - #Andra's Coffee Shop</h1>
+  <p align="center">
+    <a href="link_deploy">View Demo</a>
+    ·
+    <a href="https://github.com/arkbootcamp/week7-web6-intermediateFrontend">Report Bug</a>
+    ·
+    <a href="https://github.com/arkbootcamp/week7-web6-intermediateFrontend">Request Feature</a>
+  </p>
 
-## Project setup
-```
-npm install
+![Image Banner](https://raw.githubusercontent.com/arkbootcamp/week7-web6-intermediateFrontend/main/image_banner.jpg)
+
+## About The Project
+
+#Thsis project is created for requirement in completing Arkademy FullStack Web Developer Bootcamp
+
+## Built With
+
+[![Vue](https://img.shields.io/badge/Vue-v2.6.11-green)](https://github.com/vuejs/vue)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-v4.5.x-blue)](https://github.com/bootstrap-vue/bootstrap-vue)
+
+## Requirements
+
+1. <a href="https://nodejs.org/en/download/">Node Js</a>
+2. Node_modules `npm install` or `yarn install`
+3. Backend API #nama_projek [`here`](https://github.com/arkbootcamp/week4-web3-express)
+
+## Getting Started
+
+1. Download this Project or you can type `git clone #link_git`
+2. Open app's directory in CMD or Terminal
+3. Type `npm install` or `yarn install`
+4. Add .env file at root folder project
+
+```sh
+VUE_APP_ENDPOINT = [Backend API]
 ```
 
-### .ENV Setup
-```
-make .env file and type :
-VUE_APP_URL = localhost:3000
-```
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+5. Type `npm run serve`
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Acknowledgements
 
-### Lints and fixes files
-```
-npm run lint
-```
+- [Axios](https://www.npmjs.com/package/axios)
+- [Vuex](https://vuex.vuejs.org/)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## License
+
+© [Andrawan Erlang](https://github.com/andrawanerlang1/)
