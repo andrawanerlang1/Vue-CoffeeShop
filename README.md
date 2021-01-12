@@ -11,7 +11,7 @@
 
 ## About The Project
 
-#Thsis project is created for requirement in completing Arkademy FullStack Web Developer Bootcamp
+This project is created for requirement in completing Arkademy FullStack Web Developer Bootcamp
 
 ## Built With
 
