@@ -7,7 +7,7 @@
     <a href="https://github.com/arkbootcamp/week7-web6-intermediateFrontend">Request Feature</a>
   </p>
 
-![Image Banner](https://raw.githubusercontent.com/arkbootcamp/week7-web6-intermediateFrontend/main/image_banner.jpg)
+![Image Banner](https://raw.githubusercontent.com/andrawanerlang1/Vue-CoffeeShop/screenshot.jpg)
 
 ## About The Project
 
@@ -32,7 +32,7 @@
 4. Add .env file at root folder project
 
 ```sh
-VUE_APP_ENDPOINT = [Backend API]
+VUE_APP_ENDPOINT = localhost:3000
 ```
 
 5. Type `npm run serve`
