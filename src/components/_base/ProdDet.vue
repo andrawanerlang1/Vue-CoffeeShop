@@ -189,7 +189,7 @@ export default {
   data() {
     return {
       product_id: '',
-      cart: [],
+      // cart: [],
       form: {
         size_choice: 0,
         deliver_id: 0,
@@ -200,13 +200,6 @@ export default {
   created() {
     this.product_id = this.$route.params.id
     this.getProductById()
-    let getCart = localStorage.getItem('cart')
-    getCart = JSON.parse(getCart)
-    if (getCart) {
-      this.cart = getCart
-    } else {
-      this.cart = []
-    }
   },
   computed: {
     ...mapGetters({
@@ -215,7 +208,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['getProductsById', 'deletesProduct']),
+    ...mapActions(['getProductsById', 'deletesProduct', 'addToCarts']),
     ...mapGetters(['getDataProductById']),
     getProductById() {
       this.getProductsById(this.product_id)
@@ -230,7 +223,7 @@ export default {
       this.$router.push({ name: 'Update', params: { id: product_id } })
     },
     addToCart(data) {
-      let totals = data.product_price * this.form.quantity
+      let totals = data.product_price * parseInt(this.form.quantity)
       if (!this.form.quantity) {
         this.toast2('b-toaster-top-full', 'Please input quantity')
       } else if (!this.form.size_choice) {
@@ -241,15 +234,14 @@ export default {
         const setCart = {
           product_id: data.product_id,
           product_name: data.product_name,
+          product_image: data.product_image,
           product_price: data.product_price,
           product_qty: this.form.quantity,
           product_size: this.form.size_choice,
           product_deliver: this.form.deliver_id,
           product_total: totals
         }
-        this.cart = [...this.cart, setCart]
-        localStorage.setItem('cart', JSON.stringify(this.cart))
-        console.log(this.cart)
+        this.addToCarts(setCart)
         this.toast1('b-toaster-top-full')
       }
     },

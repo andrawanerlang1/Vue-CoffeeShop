@@ -14,7 +14,13 @@
               :key="index"
             >
               <div class="img">
-                <img src="@/assets/haz.png" />
+                <img
+                  :src="
+                    !item.product_image
+                      ? require('../../assets/haz.png')
+                      : 'http://localhost:3000/product/' + item.product_image
+                  "
+                />
               </div>
               <div class="det">
                 <p>{{ item.product_name }}</p>
@@ -26,7 +32,7 @@
                 <p v-show="item.product_size == 5">300 Grams</p>
                 <p v-show="item.product_size == 6">500 Grams</p>
               </div>
-              <div class="price">IDR {{ item.product_price }}</div>
+              <div class="price">IDR {{ item.product_total }}</div>
             </div>
           </div>
         </div>
@@ -60,14 +66,18 @@
       <div class="address">
         <div class="top">
           <div class="address">Address details</div>
-          <div class="edit">edit</div>
+          <div>
+            <router-link class="edit" to="/editprofile"> edit </router-link>
+          </div>
         </div>
         <div class="bot">
-          <p><b>Delivery</b> to Iskandar Street</p>
+          <p><b>Delivery</b> to</p>
           <div class="mid">
-            <p>Km 5 refinery road oppsite re public road, effurun, Jakarta</p>
+            <p>
+              {{ user.user_address }}
+            </p>
           </div>
-          <p>+62 81348287878</p>
+          <p>{{ user.user_number }}</p>
         </div>
       </div>
       <div class="payment">
@@ -81,7 +91,8 @@
               type="radio"
               name="gridRadios"
               id="gridRadios2"
-              value="option2"
+              value="card"
+              v-model="history_payment"
             />
             <label class="form-check-label" for="gridRadios2">
               <img src="@/assets/card.png" alt="" />
@@ -94,7 +105,8 @@
               type="radio"
               name="gridRadios"
               id="gridRadios2"
-              value="option2"
+              value="bank"
+              v-model="history_payment"
             />
             <label class="form-check-label" for="gridRadios2">
               <img src="@/assets/bank.png" alt="" />
@@ -107,7 +119,8 @@
               type="radio"
               name="gridRadios"
               id="gridRadios3"
-              value="option3"
+              value="cash"
+              v-model="history_payment"
             />
             <label class="form-check-label" for="gridRadios3">
               <img src="@/assets/delivery.png" alt="" />
@@ -117,32 +130,82 @@
         </div>
       </div>
       <div class="confirm">
-        <button class="btn btn-dark" @click="confirm()">
+        <button class="btn btn-dark" @click="showModal">
           Confirm and Pay
         </button>
       </div>
+      <b-modal ref="my-modal" hide-footer title="Purchase Details">
+        <div>
+          <p>Account Email : {{ user.user_email }}</p>
+          <p>Delivery Address : {{ user.user_address }}</p>
+          Total payment : {{ total }}
+          <p>Payment Method : {{ history_payment }}</p>
+        </div>
+        <b-button
+          class="mt-3"
+          variant="outline-success"
+          block
+          @click="handlePay"
+          >Purchase and Pay</b-button
+        >
+        <b-button class="mt-2" variant="outline-danger" block @click="hideModal"
+          >Cancel</b-button
+        >
+      </b-modal>
     </div>
   </div>
 </template>
 <script>
+import { mapGetters, mapActions } from 'vuex'
+import toastMixins from '../../mixins/toastMixins'
+
 export default {
   name: 'ProductDetail',
   data() {
     return {
-      cart: [],
+      // cart: [],
+      history_payment: 'cash',
       subtotal: 0,
       tax: 0,
       shipping: 0,
       total: 0
     }
   },
+  mixins: [toastMixins],
+  created() {
+    this.getTotal()
+  },
+  computed: {
+    ...mapGetters({
+      cart: 'getCart',
+      user: 'setUser',
+      history_id: 'getHistoryId'
+    })
+  },
   methods: {
-    confirm() {
-      alert('Confirmed')
+    ...mapActions(['createHistory', 'delCarts', 'createHistoryDetail']),
+    ...mapGetters(['getCart', 'getHistoryId']),
+    async handlePay() {
+      const dataHistory = {
+        history_subtotal: this.total,
+        history_payment: this.history_payment,
+        user_id: this.user.user_id
+      }
+      await this.createHistory(dataHistory)
+      for (let x = 0; x < this.cart.length; x++) {
+        this.createHistoryDetail(this.cart[x])
+      }
+      this.hideModal()
+      this.toastMixins(
+        'Thankyou for your purchase',
+        'success',
+        'Payment Successfull'
+      )
+      this.delCarts()
     },
     getTotal() {
       for (let x = 0; x < this.cart.length; x++) {
-        this.subtotal += this.cart[x].product_price
+        this.subtotal += this.cart[x].product_total
       }
       this.tax = this.subtotal * 0.1
       this.shipping = this.subtotal * 0.05
@@ -156,17 +219,13 @@ export default {
         .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
       this.total = this.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
       return this.total
+    },
+    showModal() {
+      this.$refs['my-modal'].show()
+    },
+    hideModal() {
+      this.$refs['my-modal'].hide()
     }
-  },
-  created() {
-    let getCart = localStorage.getItem('cart')
-    getCart = JSON.parse(getCart)
-    if (getCart) {
-      this.cart = getCart
-    } else {
-      this.cart = []
-    }
-    this.getTotal()
   }
 }
 </script>
@@ -229,8 +288,8 @@ export default {
   justify-content: space-between;
 }
 .kiri .bot .flex-container img {
-  height: auto;
-  width: 80%;
+  height: 80px;
+  width: 80px;
   border-radius: 15%;
 }
 .kiri .bot .flex-container div {
@@ -283,7 +342,8 @@ export default {
   color: white;
   text-shadow: 2px 2px black;
 }
-.address .top .edit {
+.edit:link,
+.edit:visited {
   font-family: Poppins;
   font-weight: 500;
   font-size: 15px;

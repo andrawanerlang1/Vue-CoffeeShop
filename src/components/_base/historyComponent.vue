@@ -8,15 +8,22 @@
       <div class="bot-main">
         <button class="link">Select All</button>
         <div class="box-main">
-          <div class="box-main-item">
+          <div
+            class="box-main-item"
+            v-for="(item, index) in history"
+            :key="index"
+            @click="showModal"
+          >
             <div class="box-main-left">
               <img src="../../assets/veg.png" alt="" />
             </div>
             <div class="box-main-right">
-              <div class="name">Veggie Tomato Mix</div>
-              <div class="price">IDR 34.000</div>
+              <div class="name">History ID : {{ item.history_id }}</div>
+              <div class="price">
+                {{ item.history_created_at }}
+              </div>
               <div class="status">
-                <div>Delivered</div>
+                <div>IDR {{ item.history_subtotal }}.000</div>
                 <input
                   type="checkbox"
                   class="form-check-input"
@@ -26,10 +33,51 @@
             </div>
           </div>
         </div>
+        <b-modal ref="my-modal" hide-footer title="Input New Password">
+          <div>
+            History Details:
+          </div>
+          <b-button class="mt-3" variant="outline-danger" block
+            >Delete History</b-button
+          >
+          <b-button
+            class="mt-2"
+            variant="outline-warning"
+            block
+            @click="hideModal"
+            >Close</b-button
+          >
+        </b-modal>
       </div>
     </main>
   </div>
 </template>
+<script>
+import { mapGetters, mapActions } from 'vuex'
+
+export default {
+  name: 'history',
+  mounted() {
+    this.getHistoryAcc(this.user.user_id)
+  },
+  computed: {
+    ...mapGetters({
+      history: 'getHistoryByUserId',
+      user: 'setUser'
+    })
+  },
+  methods: {
+    ...mapGetters(['getHistoryByUserId', 'setUser']),
+    ...mapActions(['getHistoryAcc']),
+    showModal() {
+      this.$refs['my-modal'].show()
+    },
+    hideModal() {
+      this.$refs['my-modal'].hide()
+    }
+  }
+}
+</script>
 
 <style scoped>
 main {
@@ -84,6 +132,10 @@ main .bot-main {
   height: 100px;
   display: flex;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.59);
+}
+.box-main-item:hover {
+  background-color: wheat;
+  border: black solid 2px;
 }
 .box-main-left {
   flex: 1;

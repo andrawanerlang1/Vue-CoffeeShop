@@ -7,7 +7,8 @@ export default {
     products: [],
     productsById: [{}],
     totalRows: null,
-    formId: {}
+    formId: {},
+    cart: []
   },
   mutations: {
     setProduct(state, payload) {
@@ -17,6 +18,12 @@ export default {
     setProductById(state, payload) {
       state.productsById = payload.data
       state.formId = payload.data[0]
+    },
+    addToCart(state, payload) {
+      state.cart = [...state.cart, payload]
+    },
+    delCart(state) {
+      state.cart = []
     },
     changePage(state, payload) {
       state.page = payload
@@ -29,6 +36,10 @@ export default {
     }
   },
   actions: {
+    addToCarts(context, payload) {
+      context.commit('addToCart', payload)
+      console.log(context.state.cart)
+    },
     getProducts(context, payload) {
       return new Promise((resolve, reject) => {
         if (payload) {
@@ -233,6 +244,9 @@ export default {
             reject(error)
           })
       })
+    },
+    delCarts(context) {
+      context.commit('delCart')
     }
   },
 
@@ -257,6 +271,9 @@ export default {
     },
     getFormId(state) {
       return state.formId
+    },
+    getCart(state) {
+      return state.cart
     }
   }
 }

@@ -67,8 +67,9 @@ export default {
     ...mapGetters({ user: 'setUser' })
   },
   methods: {
-    ...mapActions(['logout']),
+    ...mapActions(['logout', 'delCarts']),
     handleLogout() {
+      this.delCarts()
       this.logout()
     },
     editProfile(user_id) {
