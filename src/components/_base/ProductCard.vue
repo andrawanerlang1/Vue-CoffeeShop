@@ -47,7 +47,7 @@
             <img
               :src="
                 !item.product_image
-                  ? require('../../assets/cold.png')
+                  ? require('../../assets/404.jpg')
                   : 'http://localhost:3000/product/' + item.product_image
               "
               style="border-radius: 50%;"

@@ -216,6 +216,7 @@ export default {
       )
       const type = event.target.files[0].type
       if (type != 'image/jpeg' && type != 'image/png' && type != 'image/jpg') {
+        this.form.coupon_image = 'bukan image'
         return this.toast3('b-toaster-top-full')
       }
     },
@@ -234,6 +235,8 @@ export default {
         return this.toast1('b-toaster-top-full')
       } else if (discount > 99) {
         return alert("Coupon discount (%) can't exceed 99%")
+      } else if (this.form.coupon_image == 'bukan image') {
+        return this.toast3('b-toaster-top-full')
       } else {
         this.uploadCoupon(this.form)
         this.toast2('b-toaster-top-full')

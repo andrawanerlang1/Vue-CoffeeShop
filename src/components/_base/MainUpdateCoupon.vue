@@ -226,11 +226,7 @@ export default {
       )
       const type = event.target.files[0].type
       if (type != 'image/jpeg' && type != 'image/png' && type != 'image/jpg') {
-        return this.toastMixins(
-          'Image must be jpeg / png',
-          'danger',
-          'attention!!'
-        )
+        this.toastMixins('Image must be jpeg / png', 'danger', 'attention!!')
       }
     },
     getCouponById() {

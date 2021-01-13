@@ -68,7 +68,6 @@
                 placeholder="Input Stock"
               />
             </div>
-            {{ url }}
           </div>
         </b-col>
         <b-col xl="8" md="6" id="right">
@@ -218,6 +217,7 @@ export default {
       )
       const type = event.target.files[0].type
       if (type != 'image/jpeg' && type != 'image/png' && type != 'image/jpg') {
+        this.form.product_image = 'bukan image'
         return this.toast3('b-toaster-top-full')
       }
     },
@@ -234,6 +234,8 @@ export default {
         !this.form.deliver_id
       ) {
         return this.toast1('b-toaster-top-full')
+      } else if (this.form.product_image == 'bukan image') {
+        return this.toast3('b-toaster-top-full')
       } else {
         this.uploadProduct(this.form)
         this.toast2('b-toaster-top-full')

@@ -42,7 +42,7 @@
           </b-col>
           <b-col>
             <div id="editProfile" @click="editProfile(user.user_id)">
-              <img src="@/assets/prof.png" style="border-radius: 50%;" />
+              <img src="@/assets/waifu.jpg" style="border-radius: 50%;" />
             </div>
           </b-col>
         </b-row>
@@ -83,6 +83,9 @@ export default {
 #editProfile img:hover {
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2),
     2px 2px 2px 2px rgba(0, 0, 0, 0.19);
+}
+#editProfile img {
+  width: 40px;
 }
 #logout {
   text-align: center;

@@ -18,21 +18,21 @@
               <img
                 :src="
                   !couponData[couponArr].coupon_image
-                    ? require('../../assets/rice.png')
+                    ? require('../../assets/404.jpg')
                     : 'http://localhost:3000/coupon/' +
                       couponData[couponArr].coupon_image
                 "
               />
             </div>
-            <div class="two">
+            <div id="midCoup" class="two">
               <div class="atas">
                 {{ couponData[couponArr].coupon_name }}
               </div>
               <div class="bawah">
-                Discounted : IDR {{ couponData[couponArr].coupon_price }}
+                IDR {{ couponData[couponArr].coupon_price }}
               </div>
             </div>
-            <div class="three">
+            <div id="midCoup" class="three">
               {{ couponData[couponArr].coupon_desc }}
             </div>
             <br />
@@ -174,7 +174,10 @@ export default {
   /* height: 1005px; */
   background-color: white;
 }
-
+#midCoup {
+  padding-left: 20px;
+  padding-right: 20px;
+}
 #changeCoupon button {
   position: relative;
   width: 260px;

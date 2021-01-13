@@ -4,7 +4,7 @@
     <div class="containermain">
       <div class="kiri">
         <div class="profpic">
-          <img src="../../assets/prof.png" alt="" />
+          <img src="../../assets/waifu.jpg" alt="" />
           <h2>{{ user.user_display_name }}</h2>
           <h4>{{ user.user_email }}</h4>
         </div>
@@ -19,8 +19,13 @@
           <b-form-input
             type="text"
             placeholder="Input your new password"
+            v-model="newPassword"
           ></b-form-input>
-          <b-button class="mt-3" variant="outline-danger" block
+          <b-button
+            @click="passwordUpdate"
+            class="mt-3"
+            variant="outline-danger"
+            block
             >Confirm new password</b-button
           >
           <b-button
@@ -45,9 +50,6 @@
         </div>
       </div>
       <div class="kanan">
-        <!-- <div class="sunting">
-          <img src="../../assets/sunting.png" alt="" />
-        </div> -->
         <div class="kontak">
           <div class="judul">Contact</div>
           <div class="isi">
@@ -174,7 +176,9 @@ import toastMixins from '../../mixins/toastMixins'
 
 export default {
   data() {
-    return {}
+    return {
+      newPassword: null
+    }
   },
   mixins: [toastMixins],
   mounted() {
@@ -187,13 +191,23 @@ export default {
   },
   methods: {
     ...mapGetters(['setUser']),
-    ...mapActions(['getUserByIds', 'updateUsers']),
+    ...mapActions(['getUserByIds', 'updateUsers', 'patchPassword']),
     getUserById() {
       this.getUserByIds(this.user.user_id)
     },
     updateUser() {
       this.updateUsers(this.user)
       this.toastMixins('Profile Updated', 'success', 'Success!!')
+    },
+    passwordUpdate() {
+      if (!this.newPassword) {
+        this.toastMixins('Password cannot be empty', 'danger', 'attention!!')
+      } else {
+        const setData = { user_password: this.newPassword }
+        this.patchPassword(setData)
+        this.hideModal()
+        this.toastMixins('Password Updated', 'success', 'Success!!')
+      }
     },
     showModal() {
       this.$refs['my-modal'].show()
