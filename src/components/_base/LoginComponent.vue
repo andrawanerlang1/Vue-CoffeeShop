@@ -38,11 +38,9 @@
             <br />
             <br />
             <br />
-            <hr style="height:3px;background-color:#9F9F9F;" />
+            <hr style="height: 3px; background-color: #9f9f9f" />
             <div id="signup">
-              <div>
-                Don’t have an account?
-              </div>
+              <div>Don’t have an account?</div>
               <router-link to="/signup">
                 <button id="sign">Sign up here</button>
               </router-link>
@@ -55,39 +53,39 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from "vuex";
 
 export default {
-  name: 'LoginComponent',
+  name: "LoginComponent",
   data() {
     return {
       form: {
-        user_email: '',
-        user_password: ''
-      }
-    }
+        user_email: "",
+        user_password: "",
+      },
+    };
   },
 
   methods: {
-    ...mapActions(['login']),
+    ...mapActions(["login"]),
     onSubmit() {
       this.login(this.form)
-        .then(result => {
-          console.log(result)
-          this.$router.push('/')
+        .then((result) => {
+          console.log(result);
+          this.$router.push("/");
         })
-        .catch(error => {
-          this.$toasted.error(error.data.msg)
-        })
+        .catch((error) => {
+          this.$toasted.error(error.data.msg);
+        });
     },
     onReset() {
       this.form = {
-        user_email: '',
-        user_password: ''
-      }
-    }
-  }
-}
+        user_email: "",
+        user_password: "",
+      };
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -95,7 +93,7 @@ export default {
   height: 1000px;
 }
 #left {
-  background-image: url('../../assets/b-login.png');
+  background-image: url("../../assets/b-login.png");
   background-size: cover;
   background-repeat: no-repeat;
   height: 1000px;
@@ -153,7 +151,7 @@ export default {
   height: 50px;
   margin-top: 20px;
   background-color: white;
-  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 1px 0 rgba(0, 0, 0, 0.19);
 }
 #mid button.login {
   background-color: #ffba33;

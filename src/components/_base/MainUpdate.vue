@@ -189,68 +189,68 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-import toastMixins from '../../mixins/toastMixins'
+import { mapGetters, mapActions } from "vuex";
+import toastMixins from "../../mixins/toastMixins";
 
 export default {
   data() {
     return {
-      product_id: '',
+      product_id: "",
       home: 0,
       dine: 0,
       take: 0,
-      url: null
-    }
+      url: null,
+    };
   },
   mixins: [toastMixins],
   computed: {
     ...mapGetters({
-      products: 'getDataProductById',
-      form: 'getFormId'
-    })
+      products: "getDataProductById",
+      form: "getFormId",
+    }),
   },
   created() {
-    this.product_id = this.$route.params.id
-    this.getProductById()
+    this.product_id = this.$route.params.id;
+    this.getProductById();
     // deliver handling ===================
-    const deliv = this.form.deliver_id
+    const deliv = this.form.deliver_id;
     if (deliv == 1 || deliv == 4 || deliv == 5 || deliv == 7) {
-      this.home = 1
+      this.home = 1;
     }
     if (deliv == 2 || deliv == 4 || deliv == 6 || deliv == 7) {
-      this.dine = 1
+      this.dine = 1;
     }
     if (deliv == 3 || deliv == 5 || deliv == 6 || deliv == 7) {
-      this.take = 1
+      this.take = 1;
     }
   },
   methods: {
-    ...mapActions(['getProductsById', 'updateProduct']),
-    ...mapGetters(['getDataProductById']),
+    ...mapActions(["getProductsById", "updateProduct"]),
+    ...mapGetters(["getDataProductById"]),
 
     getProductById() {
-      this.getProductsById(this.product_id)
+      this.getProductsById(this.product_id);
     },
     handleFile(event) {
-      this.form.product_image = event.target.files[0]
-      this.url = URL.createObjectURL(event.target.files[0])
-      const type = event.target.files[0].type
-      if (type != 'image/jpeg' && type != 'image/png' && type != 'image/jpg') {
+      this.form.product_image = event.target.files[0];
+      this.url = URL.createObjectURL(event.target.files[0]);
+      const type = event.target.files[0].type;
+      if (type != "image/jpeg" && type != "image/png" && type != "image/jpg") {
         return this.toastMixins(
-          'Image must be jpeg / png',
-          'danger',
-          'attention!!'
-        )
+          "Image must be jpeg / png",
+          "danger",
+          "attention!!"
+        );
       }
     },
     chooseFile() {
-      document.getElementById('formInputImage').click()
+      document.getElementById("formInputImage").click();
     },
     favSet() {
       if (this.form.fav === 0) {
-        this.form.fav = 1
+        this.form.fav = 1;
       } else {
-        this.form.fav = 0
+        this.form.fav = 0;
       }
     },
     updateProducts() {
@@ -265,60 +265,64 @@ export default {
         !this.form.deliver_id ||
         !this.form.product_image
       ) {
-        return this.toastMixins('Please input all data', 'warning', 'Warning!!')
+        return this.toastMixins(
+          "Please input all data",
+          "warning",
+          "Warning!!"
+        );
       } else {
-        const param = { form: this.form, id: this.product_id }
-        this.updateProduct(param)
-        this.toastMixins('Product Updated', 'success', 'Success!!')
-        this.$router.go()
+        const param = { form: this.form, id: this.product_id };
+        this.updateProduct(param);
+        this.toastMixins("Product Updated", "success", "Success!!");
+        this.$router.go();
       }
     },
 
     deliver(param) {
       if (param == 1) {
         if (this.home == 0) {
-          this.home = 1
+          this.home = 1;
         } else {
-          this.home = 0
+          this.home = 0;
         }
       } else if (param == 2) {
         if (this.dine == 0) {
-          this.dine = 1
+          this.dine = 1;
         } else {
-          this.dine = 0
+          this.dine = 0;
         }
       } else if (param == 3) {
         if (this.take == 0) {
-          this.take = 1
+          this.take = 1;
         } else {
-          this.take = 0
+          this.take = 0;
         }
       } else {
-        console.log(param)
+        console.log(param);
       }
-      this.calculateDeliver()
+      this.calculateDeliver();
     },
     calculateDeliver() {
       if (this.take && this.dine && this.home) {
-        this.form.deliver_id = 7
+        this.form.deliver_id = 7;
       } else if (this.take && this.dine) {
-        this.form.deliver_id = 6
+        this.form.deliver_id = 6;
       } else if (this.take && this.home) {
-        this.form.deliver_id = 5
+        this.form.deliver_id = 5;
       } else if (this.home && this.dine) {
-        this.form.deliver_id = 4
+        this.form.deliver_id = 4;
       } else if (this.take) {
-        this.form.deliver_id = 3
+        this.form.deliver_id = 3;
       } else if (this.dine) {
-        this.form.deliver_id = 2
+        this.form.deliver_id = 2;
       } else if (this.home) {
-        this.form.deliver_id = 1
+        this.form.deliver_id = 1;
       } else {
-        this.form.deliver_id = 0
+        this.form.deliver_id = 0;
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -338,7 +342,7 @@ export default {
   margin-bottom: 30px;
 }
 #main {
-  font-family: 'Rubik';
+  font-family: "Rubik";
 }
 #right {
   width: 80%;
