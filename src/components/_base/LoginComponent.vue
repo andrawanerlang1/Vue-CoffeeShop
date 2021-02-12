@@ -67,12 +67,19 @@ export default {
   },
 
   methods: {
-    ...mapActions(["login"]),
-    onSubmit() {
-      this.login(this.form)
-        .then((result) => {
-          console.log(result);
-          this.$router.push("/");
+    ...mapActions(["login", "getUserByIds"]),
+    async onSubmit() {
+      await this.login(this.form)
+        .then(async (result) => {
+          await this.getUserByIds(result.data.data.user_id)
+            .then((result) => {
+              this.getUserByIds(result.data.data.user_id);
+              console.log(result);
+              this.$router.push("/");
+            })
+            .catch((error) => {
+              this.$toasted.error(error.data.msg);
+            });
         })
         .catch((error) => {
           this.$toasted.error(error.data.msg);

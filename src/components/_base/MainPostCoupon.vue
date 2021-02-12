@@ -67,7 +67,6 @@
                 class="form-control"
                 placeholder="Coupon Code"
               />
-              {{ form }}
             </div>
           </div>
         </b-col>
@@ -182,46 +181,46 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from "vuex";
 
 export default {
   data() {
     return {
       form: {
-        coupon_name: '',
+        coupon_name: "",
         start_date: null,
         end_date: null,
         coupon_price: null,
         coupon_code: null,
-        coupon_desc: '',
+        coupon_desc: "",
         coupon_discount: null,
         size_id: 1,
         deliver_id: 0,
         coupon_image: null,
         home: 0,
         dine: 0,
-        take: 0
-      }
-    }
+        take: 0,
+      },
+    };
   },
   methods: {
-    ...mapActions(['uploadCoupon']),
+    ...mapActions(["uploadCoupon"]),
     chooseFile() {
-      document.getElementById('formInputImage').click()
+      document.getElementById("formInputImage").click();
     },
     handleFile(event) {
-      this.form.coupon_image = event.target.files[0]
+      this.form.coupon_image = event.target.files[0];
       this.url = URL.createObjectURL(
         (this.form.coupon_image = event.target.files[0])
-      )
-      const type = event.target.files[0].type
-      if (type != 'image/jpeg' && type != 'image/png' && type != 'image/jpg') {
-        this.form.coupon_image = 'bukan image'
-        return this.toast3('b-toaster-top-full')
+      );
+      const type = event.target.files[0].type;
+      if (type != "image/jpeg" && type != "image/png" && type != "image/jpg") {
+        this.form.coupon_image = "bukan image";
+        return this.toast3("b-toaster-top-full");
       }
     },
     postProduct() {
-      const discount = parseInt(this.form.coupon_discount)
+      const discount = parseInt(this.form.coupon_discount);
       if (
         !this.form.coupon_name ||
         !this.form.start_date ||
@@ -232,104 +231,104 @@ export default {
         !this.form.deliver_id ||
         !this.form.coupon_image
       ) {
-        return this.toast1('b-toaster-top-full')
+        return this.toast1("b-toaster-top-full");
       } else if (discount > 99) {
-        return alert("Coupon discount (%) can't exceed 99%")
-      } else if (this.form.coupon_image == 'bukan image') {
-        return this.toast3('b-toaster-top-full')
+        return alert("Coupon discount (%) can't exceed 99%");
+      } else if (this.form.coupon_image == "bukan image") {
+        return this.toast3("b-toaster-top-full");
       } else {
-        this.uploadCoupon(this.form)
-        this.toast2('b-toaster-top-full')
-        this.onReset()
+        this.uploadCoupon(this.form);
+        this.toast2("b-toaster-top-full");
+        this.onReset();
       }
     },
     onReset() {
       this.form = {
-        coupon_name: '',
+        coupon_name: "",
         start_date: null,
         end_date: null,
         coupon_price: null,
         coupon_code: null,
-        coupon_desc: '',
+        coupon_desc: "",
         size_id: 1,
         deliver_id: 0,
         home: 0,
         dine: 0,
-        take: 0
-      }
+        take: 0,
+      };
     },
     deliver(param) {
       if (param == 1) {
         if (this.form.home == 0) {
-          this.form.home = 1
+          this.form.home = 1;
         } else {
-          this.form.home = 0
+          this.form.home = 0;
         }
       } else if (param == 2) {
         if (this.form.dine == 0) {
-          this.form.dine = 1
+          this.form.dine = 1;
         } else {
-          this.form.dine = 0
+          this.form.dine = 0;
         }
       } else if (param == 3) {
         if (this.form.take == 0) {
-          this.form.take = 1
+          this.form.take = 1;
         } else {
-          this.form.take = 0
+          this.form.take = 0;
         }
       } else {
-        console.log(param)
+        console.log(param);
       }
-      this.calculateDeliver()
+      this.calculateDeliver();
     },
     calculateDeliver() {
       if (this.form.take && this.form.dine && this.form.home) {
-        this.form.deliver_id = 7
+        this.form.deliver_id = 7;
       } else if (this.form.take && this.form.dine) {
-        this.form.deliver_id = 6
+        this.form.deliver_id = 6;
       } else if (this.form.take && this.form.home) {
-        this.form.deliver_id = 5
+        this.form.deliver_id = 5;
       } else if (this.form.home && this.form.dine) {
-        this.form.deliver_id = 4
+        this.form.deliver_id = 4;
       } else if (this.form.take) {
-        this.form.deliver_id = 3
+        this.form.deliver_id = 3;
       } else if (this.form.dine) {
-        this.form.deliver_id = 2
+        this.form.deliver_id = 2;
       } else if (this.form.home) {
-        this.form.deliver_id = 1
+        this.form.deliver_id = 1;
       } else {
-        this.form.deliver_id = 0
+        this.form.deliver_id = 0;
       }
     },
     toast1(toaster, append = false) {
-      this.$bvToast.toast('Please Input All data', {
-        title: 'Warning',
+      this.$bvToast.toast("Please Input All data", {
+        title: "Warning",
         toaster: toaster,
         solid: true,
-        variant: 'warning',
-        appendToast: append
-      })
+        variant: "warning",
+        appendToast: append,
+      });
     },
     toast2(toaster, append = false) {
-      this.$bvToast.toast('Coupon created successfully', {
-        title: 'Success',
+      this.$bvToast.toast("Coupon created successfully", {
+        title: "Success",
         toaster: toaster,
         solid: true,
-        variant: 'success',
-        appendToast: append
-      })
+        variant: "success",
+        appendToast: append,
+      });
     },
     toast3(toaster, append = false) {
-      this.$bvToast.toast('Uploaded picture must be PNG or JPEG format', {
-        title: 'Warning',
+      this.$bvToast.toast("Uploaded picture must be PNG or JPEG format", {
+        title: "Warning",
         toaster: toaster,
         solid: true,
-        variant: 'warning',
-        appendToast: append
-      })
-    }
-  }
-}
+        variant: "warning",
+        appendToast: append,
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -337,7 +336,7 @@ export default {
   margin-bottom: 30px;
 }
 #main {
-  font-family: 'Rubik';
+  font-family: "Rubik";
 }
 #right {
   width: 80%;
