@@ -1,38 +1,36 @@
 <template>
   <div class="home">
-    <b-container fluid class="centered">
-      <Navbar />
-      <HistoryComponent />
-      <Footer />
-    </b-container>
+    <Navbar />
+    <HistoryComponent />
+    <Footer />
   </div>
 </template>
 
 <script>
-import Navbar from '../components/_base/Navbar'
-import Footer from '../components/_base/footer'
-import HistoryComponent from '../components/_base/historyComponent'
+import Navbar from "../components/_base/Navbar";
+import Footer from "../components/_base/footer";
+import HistoryComponent from "../components/_base/historyComponent";
 
 export default {
-  name: 'history',
+  name: "history",
   components: {
     Navbar,
     HistoryComponent,
-    Footer
+    Footer,
   },
   data() {
     return {
-      rule: 1
-    }
-  }
-}
+      rule: 1,
+    };
+  },
+};
 </script>
 
 <style scoped>
 #main {
   height: 500px;
   text-align: center;
-  background-image: url('../../src/assets/bg1.png');
+  background-image: url("../../src/assets/bg1.png");
 }
 #welcome {
   font-size: 30px;

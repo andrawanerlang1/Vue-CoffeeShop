@@ -29,7 +29,7 @@
       <div class="profile-copy">©2020CoffeeStore</div>
     </div>
     <div class="footer-product">
-      Product
+      <span> Product </span>
       <div class="download">Download</div>
       <div class="pricing">Pricing</div>
       <div class="location">Location</div>
@@ -37,7 +37,7 @@
       <div class="Blog">Blog</div>
     </div>
     <div class="footer-product">
-      Engage
+      <span> Engage </span>
       <div class="cofe">Coffee shop</div>
       <div class="faq">FAQ</div>
       <div class="abt">About Us</div>
@@ -51,11 +51,11 @@
   display: flex;
   align-items: flex-start;
   padding: 60px;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   background-color: #f8f8f8;
 }
 .footer .footer-profile {
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   flex: 3;
   display: flex;
   flex-direction: column;
@@ -135,6 +135,14 @@
   }
   .footer-profile .profile-social img {
     width: 20px;
+  }
+}
+@media (max-width: 360px) {
+  .footer-product span {
+    font-size: 13px;
+  }
+  .footer-product div {
+    font-size: 10px;
   }
 }
 </style>

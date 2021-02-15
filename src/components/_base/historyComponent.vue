@@ -3,10 +3,9 @@
     <main class="container-fluid">
       <div class="top-main">
         <h1>Let’s see what you have bought!</h1>
-        <h3>Select item to delete</h3>
+        <h3>Select item to see its details</h3>
       </div>
       <div class="bot-main">
-        <button class="link">Select All</button>
         <div class="box-main">
           <div
             class="box-main-item"
@@ -24,18 +23,13 @@
               </div>
               <div class="status">
                 <div>IDR {{ item.history_subtotal }}.000</div>
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="exampleCheck1"
-                />
               </div>
             </div>
           </div>
         </div>
         <b-modal ref="my-modal" hide-footer title="History Details">
           <div>
-            <div id="historyWrap">
+            <div id="historyWrap" style="font-weight: bold;margin-bottom:20px">
               <div>Product</div>
               <div>Quantity</div>
               <div>Total</div>
@@ -44,6 +38,7 @@
               id="contentWrap"
               v-for="(item, index) in historyDetail"
               :key="index"
+              style="border-bottom:grey solid 1px"
             >
               <div>{{ item.product_name }}</div>
               <div>{{ item.history_detail_quantity }}</div>
@@ -159,7 +154,7 @@ main .bot-main {
   margin-top: 25px;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   grid-gap: 20px;
   justify-items: center;
   justify-content: space-between;
@@ -167,18 +162,16 @@ main .bot-main {
 .box-main-item {
   background-color: white;
   margin-top: 10px;
-  width: 400px;
+  width: 350px;
   border-radius: 15px;
   height: 100px;
   display: flex;
+  justify-content: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.59);
 }
 .box-main-item:hover {
   background-color: wheat;
   border: black solid 2px;
-}
-.box-main-left {
-  flex: 1;
 }
 .box-main-left img {
   width: 85px;
@@ -188,8 +181,7 @@ main .bot-main {
   margin-top: 7px;
 }
 .box-main-right {
-  flex: 3;
-  margin-left: 15px;
+  margin-left: 35px;
 }
 .box-main-right .name {
   font-family: Poppins;
@@ -247,7 +239,10 @@ main .bot-main {
 }
 @media (max-width: 375px) {
   .box-main-item {
-    width: 200px;
+    width: 225px;
+  }
+  .box-main-item input {
+    display: none;
   }
   .box-main-item div {
     font-size: 12px;
