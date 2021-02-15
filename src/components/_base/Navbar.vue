@@ -18,11 +18,28 @@
               </router-link>
             </b-col>
             <b-col lg="3" sm="6" xs="12" id="cart">
-              <router-link to="/cart">
+              <router-link to="/dashboard" v-if="user.user_role === 1">
+                Dashboard
+              </router-link>
+            </b-col>
+            <b-col lg="3" sm="6" xs="12" id="cart">
+              <router-link to="/PostProduct" v-if="user.user_role === 1">
+                Post-Product
+              </router-link>
+            </b-col>
+            <b-col lg="3" sm="6" xs="12" id="cart">
+              <router-link to="/cart" v-if="user.user_role === 0">
                 Your cart
               </router-link>
             </b-col>
-            <b-col lg="3" sm="6" xs="12" id="history">
+
+            <b-col
+              lg="3"
+              sm="6"
+              xs="12"
+              id="history"
+              v-if="user.user_role === 0"
+            >
               <router-link to="/history">
                 History
               </router-link>
@@ -55,28 +72,28 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters } from "vuex";
 export default {
-  name: 'Navbar',
+  name: "Navbar",
   data() {
     return {
-      user_id: ''
-    }
+      user_id: "",
+    };
   },
   computed: {
-    ...mapGetters({ user: 'setUser' })
+    ...mapGetters({ user: "setUser" }),
   },
   methods: {
-    ...mapActions(['logout', 'delCarts']),
+    ...mapActions(["logout", "delCarts"]),
     handleLogout() {
-      this.delCarts()
-      this.logout()
+      this.delCarts();
+      this.logout();
     },
     editProfile(user_id) {
-      this.$router.push({ name: 'EditProfile', params: { id: user_id } })
-    }
-  }
-}
+      this.$router.push({ name: "EditProfile", params: { id: user_id } });
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -92,7 +109,7 @@ export default {
 }
 #logout button {
   background-color: wheat;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 12px;
   border-radius: 12px;
   margin-top: 10px;
@@ -103,7 +120,7 @@ export default {
   text-decoration: none;
 }
 .container-header {
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   background-color: white;
   padding: 20px;
   border-bottom: lightgray solid 3px;
