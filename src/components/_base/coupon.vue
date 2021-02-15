@@ -45,7 +45,7 @@
               {{ couponData[couponArr].coupon_code }}
             </div>
             <div class="three">
-              Valid untill {{ couponData[couponArr].end_date }}
+              Valid untill {{ couponData[couponArr].end_date.slice(0, 10) }}
             </div>
           </div>
         </div>
@@ -63,8 +63,11 @@
       </button>
     </div>
     <div>
-      <button type="button" class="line4">Apply Coupon</button>
+      <button type="button" class="line4" @click="apply(couponData[couponArr])">
+        Apply Coupon
+      </button>
       <br />
+      {{ couponData[couponArr] }}
       <br />
       <div>
         <button
@@ -116,56 +119,71 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from "vuex";
 export default {
-  name: 'coupon',
+  name: "coupon",
   data() {
     return {
-      couponArr: 0
-    }
+      couponArr: 0,
+    };
   },
   created() {
-    this.getCoupon()
+    this.getCoupon();
   },
   computed: {
-    ...mapGetters({ user: 'setUser', couponData: 'getDataCoupon' })
+    ...mapGetters({ user: "setUser", couponData: "getDataCoupon" }),
   },
   methods: {
-    ...mapActions(['getCoupons', 'deleteCoupons']),
+    ...mapActions(["getCoupons", "deleteCoupons", "addToCarts"]),
+    apply(data) {
+      console.log(data);
+      const setCart = {
+        product_id: "coupon",
+        product_name: data.coupon_name,
+        product_image: data.coupon_image,
+        product_price: data.coupon_price,
+        product_qty: 1,
+        product_size: 1,
+        product_deliver: 1,
+        product_total: data.coupon_price,
+      };
+      this.addToCarts(setCart);
+      this.$toasted.success("Coupon applied, check your cart!");
+    },
     prevCoupon() {
-      this.couponArr -= 1
+      this.couponArr -= 1;
     },
     nextCoupon() {
-      this.couponArr += 1
+      this.couponArr += 1;
     },
     getCoupon() {
-      this.getCoupons()
+      this.getCoupons();
     },
     deleteCoupon() {
-      this.deleteCoupons(this.couponArr)
-      this.toast3()
-      this.$router.go()
+      this.deleteCoupons(this.couponArr);
+      this.toast3();
+      this.$router.go();
     },
     updateCoupon(coupon_id) {
-      this.$router.push({ name: 'UpdateCoupon', params: { id: coupon_id } })
+      this.$router.push({ name: "UpdateCoupon", params: { id: coupon_id } });
     },
     showModal() {
-      this.$refs['my-modal'].show()
+      this.$refs["my-modal"].show();
     },
     hideModal() {
-      this.$refs['my-modal'].hide()
+      this.$refs["my-modal"].hide();
     },
     toast3(toaster, append = false) {
-      this.$bvToast.toast('Coupon Deleted', {
-        title: 'Success deletting Coupon',
+      this.$bvToast.toast("Coupon Deleted", {
+        title: "Success deletting Coupon",
         toaster: toaster,
         solid: true,
-        variant: 'warning',
-        appendToast: append
-      })
-    }
-  }
-}
+        variant: "warning",
+        appendToast: append,
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>
