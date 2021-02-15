@@ -14,6 +14,8 @@ import UpdateCoupon from "../views/updateCoupon.vue";
 import Login from "../views/auth/Login.vue";
 import Signup from "../views/auth/Signup.vue";
 import EditProfile from "../views/auth/editProfile.vue";
+import Dashboard from "../views/dashboard.vue";
+import ResetPassword from "../views/auth/ResetPassword.vue";
 import store from "../store";
 
 Vue.use(VueRouter);
@@ -81,6 +83,17 @@ const routes = [
     name: "PostCoupon",
     component: PostCoupon,
     meta: { requiresAdmin: true },
+  },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: Dashboard,
+    meta: { requiresAdmin: true },
+  },
+  {
+    path: "/changePassword",
+    name: "changePassword",
+    component: ResetPassword,
   },
   {
     path: "/productDetail/:id",

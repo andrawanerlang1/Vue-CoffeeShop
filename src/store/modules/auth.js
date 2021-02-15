@@ -80,6 +80,35 @@ export default {
           });
       });
     },
+    forgotPasswords(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .post(`http://${process.env.VUE_APP_URL}/user/forgot`, payload)
+          .then((result) => {
+            console.log(result);
+            resolve(result.data.msg);
+          })
+          .catch((error) => {
+            reject(error.response);
+          });
+      });
+    },
+    resetPasswords(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .patch(
+            `http://${process.env.VUE_APP_URL}/user/resetPassword`,
+            payload
+          )
+          .then((result) => {
+            console.log(result);
+            resolve(result.data.msg);
+          })
+          .catch((error) => {
+            reject(error.response);
+          });
+      });
+    },
     register(context, payload) {
       console.log(context);
       return new Promise((resolve, reject) => {
