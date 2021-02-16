@@ -9,7 +9,7 @@
               id="imageUploads"
               class="imgUpload"
               v-if="form.coupon_image && !url"
-              :src="'http://localhost:3000/coupon/' + form.coupon_image"
+              :src="`http://${URLS}/coupon/` + form.coupon_image"
             />
             <img id="imageUpload" class="imgUpload" v-if="url" :src="url" />
             <input
@@ -182,58 +182,59 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-import toastMixins from '../../mixins/toastMixins'
+import { mapGetters, mapActions } from "vuex";
+import toastMixins from "../../mixins/toastMixins";
 
 export default {
   data() {
     return {
-      coupon_id: '',
-      url: null
-    }
+      coupon_id: "",
+      url: null,
+      URLS: process.env.VUE_APP_URL,
+    };
   },
   mixins: [toastMixins],
   computed: {
     ...mapGetters({
-      coupon: 'getDataCouponById',
-      form: 'getFormIdCoupon',
-      home: 'getHomeCoupon',
-      dine: 'getDineCoupon',
-      take: 'getTakeCoupon'
-    })
+      coupon: "getDataCouponById",
+      form: "getFormIdCoupon",
+      home: "getHomeCoupon",
+      dine: "getDineCoupon",
+      take: "getTakeCoupon",
+    }),
   },
   created() {
-    this.coupon_id = this.$route.params.id
-    this.getCouponById()
+    this.coupon_id = this.$route.params.id;
+    this.getCouponById();
   },
   methods: {
-    ...mapActions(['getCouponsById', 'updateCoupons', 'delivers']),
+    ...mapActions(["getCouponsById", "updateCoupons", "delivers"]),
     ...mapGetters([
-      'getDataCouponById',
-      'getFormIdCoupon',
-      'getHomeCoupon',
-      'getDineCoupon',
-      'getTakeCoupon'
+      "getDataCouponById",
+      "getFormIdCoupon",
+      "getHomeCoupon",
+      "getDineCoupon",
+      "getTakeCoupon",
     ]),
 
     chooseFile() {
-      document.getElementById('formInputImage').click()
+      document.getElementById("formInputImage").click();
     },
     handleFile(event) {
-      this.form.coupon_image = event.target.files[0]
+      this.form.coupon_image = event.target.files[0];
       this.url = URL.createObjectURL(
         (this.form.coupon_image = event.target.files[0])
-      )
-      const type = event.target.files[0].type
-      if (type != 'image/jpeg' && type != 'image/png' && type != 'image/jpg') {
-        this.toastMixins('Image must be jpeg / png', 'danger', 'attention!!')
+      );
+      const type = event.target.files[0].type;
+      if (type != "image/jpeg" && type != "image/png" && type != "image/jpg") {
+        this.toastMixins("Image must be jpeg / png", "danger", "attention!!");
       }
     },
     getCouponById() {
-      this.getCouponsById(this.coupon_id)
+      this.getCouponsById(this.coupon_id);
     },
     updateCoupon() {
-      const discount = parseInt(this.form.coupon_discount)
+      const discount = parseInt(this.form.coupon_discount);
       if (
         !this.form.coupon_name ||
         !this.form.start_date ||
@@ -244,45 +245,49 @@ export default {
         !this.form.deliver_id ||
         !this.form.coupon_image
       ) {
-        return this.toastMixins('Please input all data', 'warning', 'Warning!!')
+        return this.toastMixins(
+          "Please input all data",
+          "warning",
+          "Warning!!"
+        );
       } else if (discount > 99) {
         this.toastMixins(
-          'Coupon discount (%) cant exceed 99%',
-          'warning',
-          'Warning!!'
-        )
+          "Coupon discount (%) cant exceed 99%",
+          "warning",
+          "Warning!!"
+        );
       } else {
-        const param = { form: this.form, id: this.coupon_id }
-        this.updateCoupons(param)
-        this.toastMixins('Coupon Updated', 'success', 'Success!!')
-        this.$router.go()
+        const param = { form: this.form, id: this.coupon_id };
+        this.updateCoupons(param);
+        this.toastMixins("Coupon Updated", "success", "Success!!");
+        this.$router.go();
       }
     },
     deliver(param) {
-      this.delivers(param)
-      this.calculateDeliver()
+      this.delivers(param);
+      this.calculateDeliver();
     },
     calculateDeliver() {
       if (this.take && this.dine && this.home) {
-        this.form.deliver_id = 7
+        this.form.deliver_id = 7;
       } else if (this.take && this.dine) {
-        this.form.deliver_id = 6
+        this.form.deliver_id = 6;
       } else if (this.take && this.home) {
-        this.form.deliver_id = 5
+        this.form.deliver_id = 5;
       } else if (this.home && this.dine) {
-        this.form.deliver_id = 4
+        this.form.deliver_id = 4;
       } else if (this.take) {
-        this.form.deliver_id = 3
+        this.form.deliver_id = 3;
       } else if (this.dine) {
-        this.form.deliver_id = 2
+        this.form.deliver_id = 2;
       } else if (this.home) {
-        this.form.deliver_id = 1
+        this.form.deliver_id = 1;
       } else {
-        this.form.deliver_id = 0
+        this.form.deliver_id = 0;
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -290,7 +295,7 @@ export default {
   margin-bottom: 30px;
 }
 #main {
-  font-family: 'Rubik';
+  font-family: "Rubik";
 }
 #right {
   width: 80%;

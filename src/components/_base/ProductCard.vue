@@ -48,7 +48,7 @@
               :src="
                 !item.product_image
                   ? require('../../assets/404.jpg')
-                  : 'http://localhost:3000/product/' + item.product_image
+                  : `http://${URLS}/product/` + item.product_image
               "
               style="border-radius: 50%;"
             />
@@ -72,86 +72,87 @@
 
 <script>
 // import axios from 'axios'
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from "vuex";
 
 export default {
-  name: 'ProductCard',
+  name: "ProductCard",
   computed: {
     ...mapGetters({
-      limit: 'getLimitProduct',
-      page: 'getPageProduct',
-      products: 'getDataProduct',
-      rows: 'getTotalRowsProduct'
-    })
+      limit: "getLimitProduct",
+      page: "getPageProduct",
+      products: "getDataProduct",
+      rows: "getTotalRowsProduct",
+    }),
   },
   data() {
     return {
       sortShow: 0,
-      category: '',
+      category: "",
       currentPage: 1,
       activePage: 0,
       isSorted: 0,
-      sortType: '',
-      bold: 'color : black;',
-      normal: ' '
-    }
+      sortType: "",
+      bold: "color : black;",
+      normal: " ",
+      URLS: process.env.VUE_APP_URL,
+    };
   },
   created() {
-    this.resetPage()
-    this.currentPage = 1
-    this.getProducts()
+    this.resetPage();
+    this.currentPage = 1;
+    this.getProducts();
   },
   methods: {
-    ...mapActions(['getProducts', 'getProductsSort']),
-    ...mapMutations(['changePage', 'resetPage']),
+    ...mapActions(["getProducts", "getProductsSort"]),
+    ...mapMutations(["changePage", "resetPage"]),
     sort(param) {
       const sortData = {
         sort: param,
-        category: this.activePage
-      }
-      this.getProductsSort(sortData)
-      this.isSorted = 1
-      this.sortType = param
+        category: this.activePage,
+      };
+      this.getProductsSort(sortData);
+      this.isSorted = 1;
+      this.sortType = param;
     },
     detailProduct(product_id) {
-      this.$router.push({ name: 'ProductDetail', params: { id: product_id } })
+      this.$router.push({ name: "ProductDetail", params: { id: product_id } });
     },
     showSort() {
-      this.sortShow === 0 ? (this.sortShow = 1) : (this.sortShow = 0)
+      this.sortShow === 0 ? (this.sortShow = 1) : (this.sortShow = 0);
     },
     get(id) {
-      this.resetPage()
-      this.currentPage = 1
-      this.getProduct(id)
+      this.resetPage();
+      this.currentPage = 1;
+      this.getProduct(id);
     },
     getProduct(id) {
       if (id) {
-        const params = { category: id }
-        this.getProducts(params)
-        this.activePage = id
-        this.isSorted = 0
-        this.sortType = null
+        const params = { category: id };
+        this.getProducts(params);
+        this.activePage = id;
+        this.isSorted = 0;
+        this.sortType = null;
       } else {
-        this.getProducts()
-        this.activePage = 0
-        this.isSorted = 0
-        this.sortType = null
+        this.getProducts();
+        this.activePage = 0;
+        this.isSorted = 0;
+        this.sortType = null;
       }
     },
     handlePageChange(numberPage) {
-      this.changePage(numberPage)
+      this.changePage(numberPage);
       if (this.isSorted === 0) {
         if (this.activePage) {
-          this.getProduct(this.activePage)
+          this.getProduct(this.activePage);
         } else {
-          this.getProduct()
+          this.getProduct();
         }
       } else if (this.isSorted === 1) {
-        this.sort(this.sortType)
+        this.sort(this.sortType);
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -160,7 +161,7 @@ export default {
   margin-bottom: 20px;
 }
 #sort button {
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   background-color: white;
   border-top: none;
   margin: 10px;
@@ -200,7 +201,7 @@ export default {
   flex-direction: row;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 20px;
   line-height: 24px;
   padding: 20px;

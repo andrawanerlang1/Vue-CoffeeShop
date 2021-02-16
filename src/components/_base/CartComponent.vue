@@ -19,7 +19,7 @@
                   :src="
                     !item.product_image
                       ? require('../../assets/404.jpg')
-                      : 'http://localhost:3000/product/' + item.product_image
+                      : `http://${URL}/product/` + item.product_image
                   "
                 />
                 <img
@@ -27,7 +27,7 @@
                   :src="
                     !item.product_image
                       ? require('../../assets/404.jpg')
-                      : 'http://localhost:3000/coupon/' + item.product_image
+                      : `http://${URL}/coupon/` + item.product_image
                   "
                 />
               </div>
@@ -178,6 +178,7 @@ export default {
       tax: 0,
       shipping: 0,
       total: 0,
+      URL: process.env.VUE_APP_URL,
     };
   },
   mixins: [toastMixins],

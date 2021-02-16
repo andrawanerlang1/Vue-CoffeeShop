@@ -4,7 +4,7 @@
     <div class="containermain">
       <div class="kiri">
         <div class="profpic">
-          <img src="../../assets/waifu.jpg" alt="" />
+          <img src="../../assets/blankprof.jpg" alt="" />
           <h2>{{ user.user_display_name }}</h2>
           <h4>{{ user.user_email }}</h4>
         </div>
@@ -171,58 +171,58 @@
   </div>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import toastMixins from '../../mixins/toastMixins'
+import { mapActions, mapGetters } from "vuex";
+import toastMixins from "../../mixins/toastMixins";
 
 export default {
   data() {
     return {
-      newPassword: null
-    }
+      newPassword: null,
+    };
   },
   mixins: [toastMixins],
   mounted() {
-    this.getUserById()
+    this.getUserById();
   },
   computed: {
     ...mapGetters({
-      user: 'setUser'
-    })
+      user: "setUser",
+    }),
   },
   methods: {
-    ...mapGetters(['setUser']),
-    ...mapActions(['getUserByIds', 'updateUsers', 'patchPassword']),
+    ...mapGetters(["setUser"]),
+    ...mapActions(["getUserByIds", "updateUsers", "patchPassword"]),
     getUserById() {
-      this.getUserByIds(this.user.user_id)
+      this.getUserByIds(this.user.user_id);
     },
     updateUser() {
-      this.updateUsers(this.user)
-      this.toastMixins('Profile Updated', 'success', 'Success!!')
+      this.updateUsers(this.user);
+      this.toastMixins("Profile Updated", "success", "Success!!");
     },
     passwordUpdate() {
       if (!this.newPassword) {
-        this.toastMixins('Password cannot be empty', 'danger', 'attention!!')
+        this.toastMixins("Password cannot be empty", "danger", "attention!!");
       } else {
-        const setData = { user_password: this.newPassword }
-        this.patchPassword(setData)
-        this.hideModal()
-        this.toastMixins('Password Updated', 'success', 'Success!!')
+        const setData = { user_password: this.newPassword };
+        this.patchPassword(setData);
+        this.hideModal();
+        this.toastMixins("Password Updated", "success", "Success!!");
       }
     },
     showModal() {
-      this.$refs['my-modal'].show()
+      this.$refs["my-modal"].show();
     },
     hideModal() {
-      this.$refs['my-modal'].hide()
-    }
-  }
-}
+      this.$refs["my-modal"].hide();
+    },
+  },
+};
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap");
 .main {
-  background-image: url('../../assets/bg3.png');
+  background-image: url("../../assets/bg3.png");
   background-size: cover;
   background-repeat: no-repeat;
   padding-bottom: 100px;

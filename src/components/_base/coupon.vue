@@ -16,10 +16,11 @@
           <div class="top">
             <div class="one">
               <img
+                style="border-radius:100%"
                 :src="
                   !couponData[couponArr].coupon_image
                     ? require('../../assets/404.jpg')
-                    : 'http://localhost:3000/coupon/' +
+                    : `http://${URL}/coupon/` +
                       couponData[couponArr].coupon_image
                 "
               />
@@ -67,7 +68,6 @@
         Apply Coupon
       </button>
       <br />
-      {{ couponData[couponArr] }}
       <br />
       <div>
         <button
@@ -125,6 +125,7 @@ export default {
   data() {
     return {
       couponArr: 0,
+      URL: process.env.VUE_APP_URL,
     };
   },
   created() {

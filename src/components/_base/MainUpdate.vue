@@ -9,7 +9,7 @@
               id="imageUploads"
               class="imgUpload"
               v-if="form.product_image && !url"
-              :src="'http://localhost:3000/product/' + form.product_image"
+              :src="`http://${URLS}/product/` + form.product_image"
             />
             <img id="imageUpload" class="imgUpload" v-if="url" :src="url" />
             <input
@@ -200,6 +200,7 @@ export default {
       dine: 0,
       take: 0,
       url: null,
+      URLS: process.env.VUE_APP_URL,
     };
   },
   mixins: [toastMixins],

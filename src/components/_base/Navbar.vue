@@ -2,10 +2,71 @@
   <b-container fluid class="container-header">
     <b-row>
       <b-col id="header-logo">
-        <img src="@/assets/coffee1.png" /> Coffee Shop
+        <img src="@/assets/coffee1.png" /> <span> Coffee Shop </span>
       </b-col>
       <b-col cols="8" id="header-menu">
-        <b-container fluid class="container-header-menu">
+        <b-container fluid class="container-header-menu navbarResponsive">
+          <img src="../../assets/menu.png" @click="showModalNav" />
+          <b-modal ref="nav-modal" hide-footer title="Menu Selection">
+            <b-row>
+              <b-col lg="3" sm="6" xs="12">
+                <router-link to="/" style="color:black">
+                  Home
+                </router-link>
+              </b-col>
+              <b-col lg="3" sm="6" xs="12">
+                <router-link to="/product" style="color:black">
+                  Product
+                </router-link>
+              </b-col>
+              <b-col lg="3" sm="6" xs="12">
+                <router-link
+                  to="/dashboard"
+                  v-if="user.user_role === 1"
+                  style="color:black"
+                >
+                  Dashboard
+                </router-link>
+              </b-col>
+              <b-col lg="3" sm="6" xs="12">
+                <router-link
+                  to="/PostProduct"
+                  v-if="user.user_role === 1"
+                  style="color:black"
+                >
+                  Post-Product
+                </router-link>
+              </b-col>
+              <b-col lg="3" sm="6" xs="12">
+                <router-link
+                  to="/cart"
+                  v-if="user.user_role === 0"
+                  style="color:black"
+                >
+                  Your cart
+                </router-link>
+              </b-col>
+
+              <b-col lg="3" sm="6" xs="12" id="history">
+                <router-link
+                  to="/history"
+                  v-if="user.user_role === 0"
+                  style="color:black"
+                >
+                  History
+                </router-link>
+              </b-col>
+            </b-row>
+            <b-button
+              class="mt-2"
+              variant="outline-warning"
+              block
+              @click="hideModal()"
+              >close</b-button
+            >
+          </b-modal>
+        </b-container>
+        <b-container fluid class="container-header-menu navbarHideable">
           <b-row>
             <b-col lg="3" sm="6" xs="12" id="home">
               <router-link to="/">
@@ -54,18 +115,15 @@
               <img src="@/assets/Vector.png" />
             </router-link>
           </b-col>
+          <div id="editProfile" @click="editProfile(user.user_id)">
+            <img src="@/assets/blankprof.jpg" style="border-radius: 50%;" />
+          </div>
           <b-col>
-            <a href="url"><img src="@/assets/chat.png"/></a>
-          </b-col>
-          <b-col>
-            <div id="editProfile" @click="editProfile(user.user_id)">
-              <img src="@/assets/waifu.jpg" style="border-radius: 50%;" />
+            <div id="logout">
+              <button @click="handleLogout">Logout</button>
             </div>
           </b-col>
         </b-row>
-        <div id="logout">
-          <button @click="handleLogout">Logout</button>
-        </div>
       </b-col>
     </b-row>
   </b-container>
@@ -95,11 +153,20 @@ export default {
     editProfile(user_id) {
       this.$router.push({ name: "EditProfile", params: { id: user_id } });
     },
+    showModalNav() {
+      this.$refs["nav-modal"].show();
+    },
+    hideModal() {
+      this.$refs["nav-modal"].hide();
+    },
   },
 };
 </script>
 
 <style scoped>
+.navbarResponsive {
+  display: none;
+}
 #editProfile img:hover {
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2),
     2px 2px 2px 2px rgba(0, 0, 0, 0.19);
@@ -115,7 +182,8 @@ export default {
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 12px;
   border-radius: 12px;
-  margin-top: 10px;
+  height: 30px;
+  margin-top: 15px;
 }
 .container-header a:link,
 .container-header a:visited {
@@ -158,6 +226,23 @@ export default {
 @media (max-width: 550px) {
   #header-account {
     border-top: 2px black solid;
+  }
+  .navbarHideable {
+    display: none;
+  }
+  .navbarResponsive {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: -10px;
+  }
+  .navbarResponsive img {
+    width: 50px;
+    height: 50px;
+  }
+}
+@media (max-width: 400px) {
+  #header-logo span {
+    display: none;
   }
 }
 </style>
