@@ -2,16 +2,16 @@
   <p align="center">
     <a href="link_deploy">View Demo</a>
     ·
-    <a href="https://github.com/arkbootcamp/week7-web6-intermediateFrontend">Report Bug</a>
+    <a href="https://github.com/andrawanerlang1/Vue-CoffeeShop/issues">Report Bug</a>
     ·
-    <a href="https://github.com/arkbootcamp/week7-web6-intermediateFrontend">Request Feature</a>
+    <a href="https://github.com/andrawanerlang1/Vue-CoffeeShop/pulls">Request Feature</a>
   </p>
 
 ![Image Banner](https://raw.githubusercontent.com/andrawanerlang1/Vue-CoffeeShop/main/screenshot.PNG)
 
 ## About The Project
 
-This project is created for requirement in completing Arkademy FullStack Web Developer Bootcamp
+This is a coffeeshop websites serves as a cafee or restaurant website which allow interaction beetween user and seller. Seller can post their products and coupons from the restaurant or the cafe to be sold, and also see the sales graph throght dashboard page. User can choose the product they desire, and order it throught this website. They can also see the history of their purchase, and customise their profile in the profile page.
 
 ## Built With
 
@@ -22,7 +22,7 @@ This project is created for requirement in completing Arkademy FullStack Web Dev
 
 1. <a href="https://nodejs.org/en/download/">Node Js</a>
 2. Node_modules `npm install` or `yarn install`
-3. Backend API #nama_projek [`here`](https://github.com/arkbootcamp/week4-web3-express)
+3. Backend API CoffeeShop_Backend [`here`](https://github.com/andrawanerlang1/BackEnd_Coffee_Shop_Responsive)
 
 ## Getting Started
 
