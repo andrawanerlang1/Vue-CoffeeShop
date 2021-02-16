@@ -126,7 +126,7 @@ export default {
       localStorage.removeItem("token");
       localStorage.removeItem("cart");
       context.commit("delUser");
-      router.push("/login");
+      router.push("/");
     },
     interceptorRequest(context) {
       axios.interceptors.request.use(

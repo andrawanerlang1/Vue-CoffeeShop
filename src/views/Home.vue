@@ -1,10 +1,24 @@
 <template>
   <div class="Home">
-    <Navbar />
+    <Navbar v-if="user" />
+    <div v-if="!user">
+      <b-container fluid class="container-header">
+        <b-row>
+          <b-col id="header-logo">
+            <img src="@/assets/coffee1.png" /> <span> Coffee Shop </span>
+          </b-col>
+          <b-col id="header-logo" style="text-align:right">
+            <button @click="$router.push('/login')">
+              Login Here
+            </button>
+          </b-col>
+        </b-row>
+      </b-container>
+    </div>
     <div style="margin-top: -17px">
       <header class="homeImage">
         <hr class="mt-lg-3 d-none d-lg-block" />
-        <b-container>
+        <b-container style="font-family: Poppins;">
           <b-row>
             <b-col lg="7" class="mt-lg-5 pt-lg-5">
               <div class="homeTitle">
@@ -31,32 +45,38 @@
         <b-container>
           <b-row>
             <b-col lg="12">
-              <div class="card_status mb-lg-5">
-                <b-container v-if="user.user_role === 1">
+              <div class="card_status mb-lg-5" style="font-family: Poppins;">
+                <b-container fluid>
                   <b-row class="homeMenu">
-                    <b-col lg="6">
-                      <button @click="postProduct">
-                        Create Product
-                      </button>
+                    <b-col lg="4" class="homeMid">
+                      <div style="margin-right:15px">
+                        <img src="../assets/user.png" alt="" />
+                      </div>
+                      <div>
+                        <span style="font-weight:bold">90+</span>
+                        <br />
+                        <span> Staff </span>
+                      </div>
                     </b-col>
-                    <b-col lg="6">
-                      <button @click="postCoupon">
-                        Create Coupon
-                      </button>
+                    <b-col lg="4" class="homeMid homeMidMid">
+                      <div style="margin-right:15px">
+                        <img src="../assets/location.png" alt="" />
+                      </div>
+                      <div>
+                        <span style="font-weight:bold">30+</span>
+                        <br />
+                        <span> Stores </span>
+                      </div>
                     </b-col>
-                  </b-row>
-                </b-container>
-                <b-container v-else>
-                  <b-row class="homeMenu">
-                    <b-col lg="6">
-                      <button @click="edit">
-                        Edit Profile
-                      </button>
-                    </b-col>
-                    <b-col lg="6">
-                      <button @click="history">
-                        Check My History
-                      </button>
+                    <b-col lg="4" class="homeMid">
+                      <div style="margin-right:15px">
+                        <img src="../assets/user.png" alt="" />
+                      </div>
+                      <div>
+                        <span style="font-weight:bold">800+</span>
+                        <br />
+                        <span> Customers </span>
+                      </div>
                     </b-col>
                   </b-row>
                 </b-container>
@@ -69,7 +89,9 @@
             </b-col>
             <b-col lg="6" md="12" sm="12">
               <div style="padding-bottom:30px" class="teamworkMessage">
-                <h2>We Provide Good Coffee and Healthy Meals</h2>
+                <h2 style="font-family: Poppins;">
+                  We Provide Good Coffee and Healthy Meals
+                </h2>
                 <h3
                   style="font-size:17px;font-weight:400;padding:30px 0px 30px 0px"
                 >
@@ -136,20 +158,46 @@ export default {
 };
 </script>
 <style scoped>
+.container-header {
+  font-family: "Rubik", sans-serif;
+  background-color: white;
+  padding: 20px;
+  border-bottom: lightgray solid 3px;
+  z-index: 1;
+}
+.homeMid {
+  display: flex;
+  justify-content: center;
+}
+.homeMidMid {
+  border-right: 3px solid lightgrey;
+  border-left: 3px solid lightgrey;
+}
+#header-logo {
+  font-weight: bold;
+  font-size: 20px;
+  padding-top: 20px;
+}
+#header-logo button {
+  padding: 5px 10px 5px 10px;
+  background: #ffba33;
+  border: 0;
+  color: #6a4029;
+  border-radius: 15px;
+  color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.59);
+}
+#header-logo button:hover {
+  border: 2px solid #ffba33;
+}
 .homeImage {
   background-image: url("../assets/bg4.jpg");
   background-size: cover;
   height: 700px;
 }
-.homeMenu button {
-  width: 80%;
-  margin: 20px;
-  margin-top: 50px;
-  height: 50px;
-  border-radius: 15px;
-  background: #ffba33;
-  color: #6a4029;
-  font-weight: 700;
+.homeMenu {
+  text-align: center;
+  padding-top: 40px;
 }
 .teamworkMessage div {
   font-weight: 300;
@@ -199,6 +247,21 @@ button.btn_getStarted {
   .homeMenu button {
     text-align: center;
     margin-top: 8px;
+  }
+  .homeMenu {
+    padding-top: 20px;
+  }
+  .homeMid {
+    padding-top: 15px;
+    display: flex;
+    justify-content: center;
+  }
+  .homeMidMid {
+    border-right: 0px;
+    border-left: 0px;
+  }
+  .card_status {
+    height: 280px;
   }
 }
 </style>

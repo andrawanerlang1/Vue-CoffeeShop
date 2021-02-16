@@ -29,13 +29,13 @@
                 </router-link>
               </b-col>
               <b-col lg="3" sm="6" xs="12">
-                <router-link
-                  to="/PostProduct"
+                <div
+                  @click="showModalPost"
                   v-if="user.user_role === 1"
                   style="color:black"
                 >
-                  Post-Product
-                </router-link>
+                  Post-Items
+                </div>
               </b-col>
               <b-col lg="3" sm="6" xs="12">
                 <router-link
@@ -54,6 +54,27 @@
                   style="color:black"
                 >
                   History
+                </router-link>
+              </b-col>
+            </b-row>
+            <b-button
+              class="mt-2"
+              variant="outline-warning"
+              block
+              @click="hideModal()"
+              >close</b-button
+            >
+          </b-modal>
+          <b-modal ref="post-modal" hide-footer title="Post Selection">
+            <b-row style="text-align:center">
+              <b-col lg="12" sm="12" xs="12">
+                <router-link to="/PostProduct" style="color:black">
+                  Post Product
+                </router-link>
+              </b-col>
+              <b-col lg="12" sm="12" xs="12">
+                <router-link to="/PostCoupon" style="color:black">
+                  Post Coupon
                 </router-link>
               </b-col>
             </b-row>
@@ -84,9 +105,9 @@
               </router-link>
             </b-col>
             <b-col lg="3" sm="6" xs="12" id="cart">
-              <router-link to="/PostProduct" v-if="user.user_role === 1">
-                Post-Product
-              </router-link>
+              <div @click="showModalPost" v-if="user.user_role === 1">
+                Post-Items
+              </div>
             </b-col>
             <b-col lg="3" sm="6" xs="12" id="cart">
               <router-link to="/cart" v-if="user.user_role === 0">
@@ -156,8 +177,12 @@ export default {
     showModalNav() {
       this.$refs["nav-modal"].show();
     },
+    showModalPost() {
+      this.$refs["post-modal"].show();
+    },
     hideModal() {
       this.$refs["nav-modal"].hide();
+      this.$refs["post-modal"].hide();
     },
   },
 };
