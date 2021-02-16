@@ -7,7 +7,7 @@
     <a href="https://github.com/andrawanerlang1/Vue-CoffeeShop/pulls">Request Feature</a>
   </p>
 
-![Image Banner](https://raw.githubusercontent.com/andrawanerlang1/Vue-CoffeeShop/main/screenshot.PNG)
+![Image Banner](https://raw.githubusercontent.com/andrawanerlang1/Vue-CoffeeShop/main/screenshot.jpg)
 
 ## About The Project
 
