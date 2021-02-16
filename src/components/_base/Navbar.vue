@@ -99,22 +99,11 @@
                 Product
               </router-link>
             </b-col>
-            <b-col lg="3" sm="6" xs="12" id="cart">
-              <router-link to="/dashboard" v-if="user.user_role === 1">
-                Dashboard
-              </router-link>
-            </b-col>
-            <b-col lg="3" sm="6" xs="12" id="cart">
-              <div @click="showModalPost" v-if="user.user_role === 1">
-                Post-Items
-              </div>
-            </b-col>
-            <b-col lg="3" sm="6" xs="12" id="cart">
-              <router-link to="/cart" v-if="user.user_role === 0">
+            <b-col lg="3" sm="6" xs="12" id="cart" v-if="user.user_role === 0">
+              <router-link to="/cart">
                 Your cart
               </router-link>
             </b-col>
-
             <b-col
               lg="3"
               sm="6"
@@ -125,6 +114,16 @@
               <router-link to="/history">
                 History
               </router-link>
+            </b-col>
+            <b-col lg="3" sm="6" xs="12" id="cart" v-if="user.user_role === 1">
+              <router-link to="/dashboard">
+                Dashboard
+              </router-link>
+            </b-col>
+            <b-col lg="3" sm="6" xs="12" id="cart" v-if="user.user_role === 1">
+              <div @click="showModalPost">
+                Post-Items
+              </div>
             </b-col>
           </b-row>
         </b-container>
