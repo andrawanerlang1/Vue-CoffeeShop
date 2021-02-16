@@ -1,43 +1,123 @@
 <template>
-  <div class="Dashboard">
+  <div>
     <Navbar />
-    <hr class="mt-lg-3 d-none d-lg-block" />
-    <b-container>
-      <card />
-      <div class="mt-xl-4 mt-3 mb-xl-4 mb-4">
-        <b-card class="chart_card">
-          <Chart />
-        </b-card>
-      </div>
-    </b-container>
+    <div class="main">
+      <b-container class="dashboard-container">
+        <div class="text-center mb-5">
+          <h2 class="header-text">See how your store progress so far</h2>
+        </div>
+        <b-row class="mb-5">
+          <b-col col lg="4" cols="12" class="dashboard-Income">
+            <Income
+              :data="today"
+              :income="todayIncome.data[0].total_income * 1000"
+            />
+          </b-col>
+          <b-col col lg="4" cols="12" class="dashboard-Income">
+            <Income
+              :data="week"
+              :income="weekOrders.data[0].total_income * 1000"
+            />
+          </b-col>
+          <b-col col lg="4" cols="12" class="dashboard-Income">
+            <Income
+              :data="year"
+              :income="yearIncome.data[0].total_income * 1000"
+            />
+          </b-col>
+        </b-row>
+        <Chart class="mb-5" />
+        <Button class="mb-5" />
+      </b-container>
+    </div>
     <Footer />
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 import Navbar from "../components/_base/Navbar";
 import Footer from "../components/_base/footer";
-import card from "../components/_base/DashboardCard";
-import Chart from "../components/_base/DashboardChart";
+import Income from "../components/_base/dashbord/Card";
+import Chart from "../components/_base/dashbord/Chart";
+import Button from "../components/_base/dashbord/Button";
+
 export default {
-  name: "Dashboard",
   components: {
     Navbar,
     Footer,
-    card,
+    Income,
     Chart,
+    Button,
+  },
+  computed: {
+    ...mapGetters({
+      yearIncome: "getYearIncome",
+      weekOrders: "getWeekOrders",
+      todayIncome: "getTodayIncome",
+      monthReport: "getMonthReport",
+    }),
+  },
+  methods: {
+    ...mapActions(["getYearIncome", "getWeekOrders", "getTodayIncome"]),
+  },
+  created() {
+    this.getYearIncome();
+    this.getWeekOrders();
+    this.getTodayIncome();
   },
   data() {
     return {
-      role: 1,
-      MassageValue: 30,
+      today: {
+        title: "Today Income",
+        currency: "Rp",
+        style: "background-color: #ffcb65",
+      },
+      week: {
+        title: "This Week Income",
+        currency: "Rp",
+        style: "background-color: #ffcb65",
+      },
+      year: {
+        title: "This Year Income",
+        currency: "Rp",
+        style: "background-color: #ffcb65",
+      },
     };
   },
 };
 </script>
+
 <style scoped>
-.chart_card {
+.main {
+  background-image: url("../assets/bg1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 50px 0;
+}
+
+.dashboard-container {
+  background-color: rgba(255, 255, 255, 0.93);
   border-radius: 10px;
-  box-shadow: 6px 6px 20px rgba(196, 196, 196, 0.67);
+  padding: 20px 30px 1px;
+  -webkit-box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.header-text {
+  color: #6a4029;
+  font-weight: 700;
+}
+
+@media (max-width: 991px) {
+  .dashboard-Income {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .dashboard-container {
+    padding: 20px 20px 1px;
+  }
 }
 </style>

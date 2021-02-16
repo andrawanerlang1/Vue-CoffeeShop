@@ -72,7 +72,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   name: "Navbar",
   data() {
@@ -85,9 +85,12 @@ export default {
   },
   methods: {
     ...mapActions(["logout", "delCarts"]),
+    ...mapMutations(["delMonthReport"]),
+
     handleLogout() {
       this.delCarts();
       this.logout();
+      this.delMonthReport();
     },
     editProfile(user_id) {
       this.$router.push({ name: "EditProfile", params: { id: user_id } });

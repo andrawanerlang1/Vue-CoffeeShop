@@ -106,13 +106,19 @@ export default {
   },
 
   methods: {
-    ...mapActions(["login", "getUserByIds", "forgotPasswords"]),
+    ...mapActions([
+      "login",
+      "getUserByIds",
+      "forgotPasswords",
+      "getMonthReport",
+    ]),
     async onSubmit() {
       await this.login(this.form)
         .then(async (result) => {
           await this.getUserByIds(result.data.data.user_id)
             .then((result) => {
               this.getUserByIds(result.data.data.user_id);
+              this.getMonthReport();
               console.log(result);
               this.$router.push("/");
             })
