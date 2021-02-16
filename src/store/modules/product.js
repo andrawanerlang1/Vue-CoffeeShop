@@ -46,7 +46,7 @@ export default {
           if (payload.category) {
             axios
               .get(
-                `http://${process.env.VUE_APP_URL}/product?page=${context.state.page}&limit=${context.state.limit}&category=${payload.category}`
+                `https://${process.env.VUE_APP_URL}/product?page=${context.state.page}&limit=${context.state.limit}&category=${payload.category}`
               )
               .then((response) => {
                 console.log(response);
@@ -60,7 +60,7 @@ export default {
           } else if (payload.name) {
             axios
               .get(
-                `http://${process.env.VUE_APP_URL}/product?page=${context.state.page}&limit=${context.state.limit}&productName=${payload.name}`
+                `https://${process.env.VUE_APP_URL}/product?page=${context.state.page}&limit=${context.state.limit}&productName=${payload.name}`
               )
               .then((response) => {
                 console.log(response);
@@ -73,7 +73,7 @@ export default {
         } else {
           axios
             .get(
-              `http://${process.env.VUE_APP_URL}/product?fav=true&page=${context.state.page}&limit=${context.state.limit}`
+              `https://${process.env.VUE_APP_URL}/product?fav=true&page=${context.state.page}&limit=${context.state.limit}`
             )
             .then((response) => {
               console.log(response);
@@ -92,7 +92,7 @@ export default {
         if (payload.category) {
           axios
             .get(
-              `http://${process.env.VUE_APP_URL}/product?page=${context.state.page}&limit=${context.state.limit}&category=${payload.category}&sort=${payload.sort}`
+              `https://${process.env.VUE_APP_URL}/product?page=${context.state.page}&limit=${context.state.limit}&category=${payload.category}&sort=${payload.sort}`
             )
             .then((response) => {
               resolve(response);
@@ -105,7 +105,7 @@ export default {
         } else if (payload.name) {
           axios
             .get(
-              `http://${process.env.VUE_APP_URL}/product?page=${context.state.page}&limit=${context.state.limit}&productName=${payload.name}&sort=${payload.sort}`
+              `https://${process.env.VUE_APP_URL}/product?page=${context.state.page}&limit=${context.state.limit}&productName=${payload.name}&sort=${payload.sort}`
             )
             .then((response) => {
               resolve(response);
@@ -118,7 +118,7 @@ export default {
         } else {
           axios
             .get(
-              `http://${process.env.VUE_APP_URL}/product?fav=true&page=${context.state.page}&limit=${context.state.limit}&sort=${payload.sort}`
+              `https://${process.env.VUE_APP_URL}/product?fav=true&page=${context.state.page}&limit=${context.state.limit}&sort=${payload.sort}`
             )
             .then((response) => {
               resolve(response);
@@ -134,7 +134,7 @@ export default {
     getProductsById(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .get(`http://${process.env.VUE_APP_URL}/product/${payload}`)
+          .get(`https://${process.env.VUE_APP_URL}/product/${payload}`)
           .then((response) => {
             console.log(response);
             resolve(response);
@@ -176,7 +176,7 @@ export default {
         data.append("fav", fav);
 
         axios
-          .post(`http://${process.env.VUE_APP_URL}/product`, data)
+          .post(`https://${process.env.VUE_APP_URL}/product`, data)
           .then((response) => {
             console.log(response);
             resolve(response.data.msg);
@@ -217,7 +217,7 @@ export default {
         data.append("fav", fav);
         axios
           .patch(
-            `http://${process.env.VUE_APP_URL}/product/${payload.id}`,
+            `https://${process.env.VUE_APP_URL}/product/${payload.id}`,
             data
           )
           .then((response) => {
@@ -234,7 +234,7 @@ export default {
       console.log(context);
       return new Promise((resolve, reject) => {
         axios
-          .delete(`http://${process.env.VUE_APP_URL}/product/${payload}`)
+          .delete(`https://${process.env.VUE_APP_URL}/product/${payload}`)
           .then((response) => {
             console.log(response);
             resolve(response);

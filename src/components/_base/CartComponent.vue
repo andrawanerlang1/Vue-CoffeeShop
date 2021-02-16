@@ -19,7 +19,8 @@
                   :src="
                     !item.product_image
                       ? require('../../assets/404.jpg')
-                      : `http://${URL}/product/` + item.product_image
+                      : `https://${URL}/fileUploadsApi1/product/` +
+                        item.product_image
                   "
                 />
                 <img
@@ -27,7 +28,8 @@
                   :src="
                     !item.product_image
                       ? require('../../assets/404.jpg')
-                      : `http://${URL}/coupon/` + item.product_image
+                      : `https://${URL}/fileUploadsApi1/coupon/` +
+                        item.product_image
                   "
                 />
               </div>

@@ -9,7 +9,9 @@
               id="imageUploads"
               class="imgUpload"
               v-if="form.coupon_image && !url"
-              :src="`http://${URLS}/coupon/` + form.coupon_image"
+              :src="
+                `https://${URLS}/fileUploadsApi1/coupon/` + form.coupon_image
+              "
             />
             <img id="imageUpload" class="imgUpload" v-if="url" :src="url" />
             <input

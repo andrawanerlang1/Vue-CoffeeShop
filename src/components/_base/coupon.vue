@@ -20,7 +20,7 @@
                 :src="
                   !couponData[couponArr].coupon_image
                     ? require('../../assets/404.jpg')
-                    : `http://${URL}/coupon/` +
+                    : `https://${URL}/fileUploadsApi1/coupon/` +
                       couponData[couponArr].coupon_image
                 "
               />

@@ -9,7 +9,9 @@
               id="imageUploads"
               class="imgUpload"
               v-if="form.product_image && !url"
-              :src="`http://${URLS}/product/` + form.product_image"
+              :src="
+                `https://${URLS}/fileUploadsApi1/product/` + form.product_image
+              "
             />
             <img id="imageUpload" class="imgUpload" v-if="url" :src="url" />
             <input

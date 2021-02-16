@@ -29,7 +29,7 @@ export default {
     getYearIncome(context) {
       return new Promise((resolve, reject) => {
         axios
-          .post(`http://${context.state.URL}/history/year`)
+          .post(`https://${context.state.URL}/history/year`)
           .then((result) => {
             context.commit("setYearIncome", result.data);
             resolve(result);
@@ -42,7 +42,7 @@ export default {
     getWeekOrders(context) {
       return new Promise((resolve, reject) => {
         axios
-          .post(`http://${context.state.URL}/history/week`)
+          .post(`https://${context.state.URL}/history/week`)
           .then((result) => {
             context.commit("setWeekOrders", result.data);
             resolve(result);
@@ -55,7 +55,7 @@ export default {
     getTodayIncome(context) {
       return new Promise((resolve, reject) => {
         axios
-          .post(`http://${context.state.URL}/history/day`)
+          .post(`https://${context.state.URL}/history/day`)
           .then((result) => {
             context.commit("setTodayIncome", result.data);
             resolve(result);
@@ -68,7 +68,7 @@ export default {
     getMonthReport(context) {
       return new Promise((resolve, reject) => {
         axios
-          .post(`http://${context.state.URL}/history/month`)
+          .post(`https://${context.state.URL}/history/month`)
           .then((result) => {
             context.commit("setMonthReport", result.data.data);
             resolve(result);

@@ -48,7 +48,8 @@
               :src="
                 !item.product_image
                   ? require('../../assets/404.jpg')
-                  : `http://${URLS}/product/` + item.product_image
+                  : `https://${URLS}/fileUploadsApi1/product/` +
+                    item.product_image
               "
               style="border-radius: 50%;"
             />
