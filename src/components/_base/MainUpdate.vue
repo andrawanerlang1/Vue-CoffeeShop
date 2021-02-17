@@ -215,7 +215,6 @@ export default {
   created() {
     this.product_id = this.$route.params.id;
     this.getProductById();
-    // deliver handling ===================
     const deliv = this.form.deliver_id;
     if (deliv == 1 || deliv == 4 || deliv == 5 || deliv == 7) {
       this.home = 1;

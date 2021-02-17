@@ -190,7 +190,6 @@ export default {
   data() {
     return {
       product_id: "",
-      // cart: [],
       form: {
         size_choice: 0,
         deliver_id: 0,

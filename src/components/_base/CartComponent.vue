@@ -174,7 +174,6 @@ export default {
   name: "ProductDetail",
   data() {
     return {
-      // cart: [],
       history_payment: "cash",
       subtotal: 0,
       tax: 0,

@@ -1,7 +1,9 @@
 <template>
   <div class="Home">
-    <Navbar v-if="user" />
-    <div v-if="!user">
+    <div v-if="user.user_email">
+      <Navbar />
+    </div>
+    <div v-else>
       <b-container fluid class="container-header">
         <b-row>
           <b-col id="header-logo">
