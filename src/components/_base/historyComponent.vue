@@ -65,48 +65,48 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  name: "history",
+  name: 'history',
   data() {
     return {
-      activeId: null,
-    };
+      activeId: null
+    }
   },
   mounted() {
-    this.getHistoryAcc(this.user.user_id);
+    this.getHistoryAcc(this.user.user_id)
   },
   computed: {
     ...mapGetters({
-      history: "getHistoryByUserId",
-      user: "setUser",
-      historyDetail: "getHistoryDetails",
-    }),
+      history: 'getHistoryByUserId',
+      user: 'setUser',
+      historyDetail: 'getHistoryDetails'
+    })
   },
   methods: {
-    ...mapGetters(["getHistoryByUserId", "getHistoryDetails", "setUser"]),
-    ...mapActions(["getHistoryAcc", "getHistoryDetail", "deleteHistorys"]),
+    ...mapGetters(['getHistoryByUserId', 'getHistoryDetails', 'setUser']),
+    ...mapActions(['getHistoryAcc', 'getHistoryDetail', 'deleteHistorys']),
 
     deleteHistory(id) {
-      this.deleteHistorys(id);
-      this.$router.go();
+      this.deleteHistorys(id)
+      this.$router.go()
     },
     showModal(history_id) {
-      this.getHistoryDetail(history_id);
-      this.activeId = history_id;
-      this.$refs["my-modal"].show();
+      this.getHistoryDetail(history_id)
+      this.activeId = history_id
+      this.$refs['my-modal'].show()
     },
     hideModal() {
-      this.$refs["my-modal"].hide();
-    },
-  },
-};
+      this.$refs['my-modal'].hide()
+    }
+  }
+}
 </script>
 
 <style scoped>
 main {
-  background-image: url("../../assets/bg2.png");
+  background-image: url('../../assets/bg2.png');
   background-size: cover;
   background-repeat: no-repeat;
 }

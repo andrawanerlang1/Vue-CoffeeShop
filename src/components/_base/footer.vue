@@ -51,11 +51,11 @@
   display: flex;
   align-items: flex-start;
   padding: 60px;
-  font-family: "Rubik", sans-serif;
+  font-family: 'Rubik', sans-serif;
   background-color: #f8f8f8;
 }
 .footer .footer-profile {
-  font-family: "Rubik", sans-serif;
+  font-family: 'Rubik', sans-serif;
   flex: 3;
   display: flex;
   flex-direction: column;

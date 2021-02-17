@@ -90,64 +90,64 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex'
 
 export default {
-  name: "LoginComponent",
+  name: 'LoginComponent',
   data() {
     return {
-      mode: "login",
+      mode: 'login',
       form: {
-        user_email: "",
-        user_password: "",
+        user_email: '',
+        user_password: ''
       },
-      forgotEmail: null,
-    };
+      forgotEmail: null
+    }
   },
 
   methods: {
     ...mapActions([
-      "login",
-      "getUserByIds",
-      "forgotPasswords",
-      "getMonthReport",
+      'login',
+      'getUserByIds',
+      'forgotPasswords',
+      'getMonthReport'
     ]),
     async onSubmit() {
       await this.login(this.form)
-        .then(async (result) => {
+        .then(async result => {
           await this.getUserByIds(result.data.data.user_id)
-            .then((result) => {
-              this.getUserByIds(result.data.data.user_id);
-              this.getMonthReport();
-              console.log(result);
-              this.$router.push("/");
+            .then(result => {
+              this.getUserByIds(result.data.data.user_id)
+              this.getMonthReport()
+              console.log(result)
+              this.$router.push('/')
             })
-            .catch((error) => {
-              this.$toasted.error(error.data.msg);
-            });
+            .catch(error => {
+              this.$toasted.error(error.data.msg)
+            })
         })
-        .catch((error) => {
-          this.$toasted.error(error.data.msg);
-        });
+        .catch(error => {
+          this.$toasted.error(error.data.msg)
+        })
     },
     onReset() {
       this.form = {
-        user_email: "",
-        user_password: "",
-      };
+        user_email: '',
+        user_password: ''
+      }
     },
     forgotPassword() {
-      const setData = { email: this.forgotEmail };
+      const setData = { email: this.forgotEmail }
       this.forgotPasswords(setData)
-        .then((result) => {
-          this.$toasted.success(result);
+        .then(result => {
+          this.$toasted.success(result)
         })
-        .catch((error) => {
-          this.$toasted.error(error.data.msg);
-        });
-    },
-  },
-};
+        .catch(error => {
+          this.$toasted.error(error.data.msg)
+        })
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -155,7 +155,7 @@ export default {
   height: 1000px;
 }
 #left {
-  background-image: url("../../assets/b-login.png");
+  background-image: url('../../assets/b-login.png');
   background-size: cover;
   background-repeat: no-repeat;
   height: 1000px;

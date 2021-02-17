@@ -123,45 +123,45 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import Navbar from "../components/_base/Navbar";
-import Footer from "../components/_base/footer";
+import { mapGetters } from 'vuex'
+import Navbar from '../components/_base/Navbar'
+import Footer from '../components/_base/footer'
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     Navbar,
-    Footer,
+    Footer
   },
   data() {
-    return {};
+    return {}
   },
   computed: {
     ...mapGetters({
-      user: "setUser",
-    }),
+      user: 'setUser'
+    })
   },
   methods: {
     postProduct() {
-      this.$router.push({ name: "PostProduct" });
+      this.$router.push({ name: 'PostProduct' })
     },
     postCoupon() {
-      this.$router.push({ name: "PostCoupon" });
+      this.$router.push({ name: 'PostCoupon' })
     },
     edit() {
-      this.$router.push({ name: "EditProfile" });
+      this.$router.push({ name: 'EditProfile' })
     },
     history() {
-      this.$router.push({ name: "History" });
+      this.$router.push({ name: 'History' })
     },
     product() {
-      this.$router.push({ name: "Product" });
-    },
-  },
-};
+      this.$router.push({ name: 'Product' })
+    }
+  }
+}
 </script>
 <style scoped>
 .container-header {
-  font-family: "Rubik", sans-serif;
+  font-family: 'Rubik', sans-serif;
   background-color: white;
   padding: 20px;
   border-bottom: lightgray solid 3px;
@@ -193,7 +193,7 @@ export default {
   border: 2px solid #ffba33;
 }
 .homeImage {
-  background-image: url("../assets/bg4.jpg");
+  background-image: url('../assets/bg4.jpg');
   background-size: cover;
   height: 700px;
 }
@@ -206,7 +206,7 @@ export default {
   margin-top: 20px;
 }
 .homeTitle {
-  font-family: "Rubik", sans-serif;
+  font-family: 'Rubik', sans-serif;
 }
 .homeTitle h1 {
   font-size: 50px;

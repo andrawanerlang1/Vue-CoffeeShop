@@ -83,26 +83,26 @@
 </template>
 
 <script>
-import Navbar from "../components/_base/Navbar";
-import Footer from "../components/_base/footer";
-import { mapActions, mapMutations, mapGetters } from "vuex";
+import Navbar from '../components/_base/Navbar'
+import Footer from '../components/_base/footer'
+import { mapActions, mapMutations, mapGetters } from 'vuex'
 
 export default {
-  name: "Search",
+  name: 'Search',
   components: {
     Navbar,
-    Footer,
+    Footer
   },
   created() {
-    this.resetProduct();
+    this.resetProduct()
   },
   computed: {
     ...mapGetters({
-      limit: "getLimitProduct",
-      page: "getPageProduct",
-      products: "getDataProduct",
-      rows: "getTotalRowsProduct",
-    }),
+      limit: 'getLimitProduct',
+      page: 'getPageProduct',
+      products: 'getDataProduct',
+      rows: 'getTotalRowsProduct'
+    })
   },
   data() {
     return {
@@ -110,61 +110,61 @@ export default {
       currentPage: 1,
       sortShow: 0,
       isSorted: 0,
-      sortType: "",
-      URLS: process.env.VUE_APP_URL,
-    };
+      sortType: '',
+      URLS: process.env.VUE_APP_URL
+    }
   },
   methods: {
-    ...mapActions(["getProducts", "getProductsSort"]),
-    ...mapMutations(["resetProduct", "resetPage", "changePage"]),
+    ...mapActions(['getProducts', 'getProductsSort']),
+    ...mapMutations(['resetProduct', 'resetPage', 'changePage']),
 
     detailProduct(product_id) {
-      this.$router.push({ name: "ProductDetail", params: { id: product_id } });
+      this.$router.push({ name: 'ProductDetail', params: { id: product_id } })
     },
     showSort() {
-      this.sortShow === 0 ? (this.sortShow = 1) : (this.sortShow = 0);
+      this.sortShow === 0 ? (this.sortShow = 1) : (this.sortShow = 0)
     },
     sorting(param) {
-      this.resetPage();
-      this.currentPage = 1;
-      this.sort(param);
+      this.resetPage()
+      this.currentPage = 1
+      this.sort(param)
     },
     sort(param) {
-      const params = { name: this.name, sort: param };
-      this.getProductsSort(params);
-      this.isSorted = 1;
-      this.sortType = param;
+      const params = { name: this.name, sort: param }
+      this.getProductsSort(params)
+      this.isSorted = 1
+      this.sortType = param
     },
     get(name) {
-      this.resetPage();
-      this.currentPage = 1;
-      this.getProduct(name);
+      this.resetPage()
+      this.currentPage = 1
+      this.getProduct(name)
     },
     getProduct(search) {
-      const param = { name: search };
-      this.searchValue = 1;
-      this.getProducts(param);
-      this.isSorted = 0;
-      this.sortType = null;
+      const param = { name: search }
+      this.searchValue = 1
+      this.getProducts(param)
+      this.isSorted = 0
+      this.sortType = null
     },
     handlePageChange(numberPage) {
-      this.changePage(numberPage);
-      this.currentPage = numberPage;
+      this.changePage(numberPage)
+      this.currentPage = numberPage
       if (this.isSorted === 0) {
-        this.getProduct(this.name);
+        this.getProduct(this.name)
       } else if (this.isSorted === 1) {
-        this.sort(this.sortType);
+        this.sort(this.sortType)
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped>
 .flex-container {
   display: flex;
   flex-direction: row;
-  background-image: url("../assets/bg1.png");
+  background-image: url('../assets/bg1.png');
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -172,7 +172,7 @@ export default {
   text-align: center;
   width: 100%;
   margin-top: 30px;
-  font-family: "Rubik", sans-serif;
+  font-family: 'Rubik', sans-serif;
 }
 .search input {
   border-radius: 10px;
@@ -229,7 +229,7 @@ export default {
   flex-direction: row;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  font-family: "Rubik", sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-size: 20px;
   line-height: 24px;
   padding: 20px;

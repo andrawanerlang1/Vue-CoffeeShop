@@ -7,16 +7,16 @@
 </template>
 
 <script>
-import Navbar from "../../components/_base/Navbar";
-import Footer from "../../components/_base/footer";
-import EditProfileComponent from "../../components/_base/EditProfileComponent";
+import Navbar from '../../components/_base/Navbar'
+import Footer from '../../components/_base/footer'
+import EditProfileComponent from '../../components/_base/EditProfileComponent'
 
 export default {
-  name: "EditProfile",
+  name: 'EditProfile',
   components: {
     Navbar,
     EditProfileComponent,
-    Footer,
-  },
-};
+    Footer
+  }
+}
 </script>

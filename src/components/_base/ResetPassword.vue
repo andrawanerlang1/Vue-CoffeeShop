@@ -35,37 +35,37 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex'
 
 export default {
-  name: "LoginComponent",
+  name: 'LoginComponent',
   data() {
     return {
       query: this.$route.query,
       form: {
-        user_password: "",
-      },
-    };
+        user_password: ''
+      }
+    }
   },
 
   methods: {
-    ...mapActions(["resetPasswords"]),
+    ...mapActions(['resetPasswords']),
     async onSubmit() {
       const setData = {
         user_password: this.form.user_password,
-        token_password: this.query.keys,
-      };
+        token_password: this.query.keys
+      }
       this.resetPasswords(setData)
-        .then((result) => {
-          this.$toasted.success(result);
-          this.$router.push("/login");
+        .then(result => {
+          this.$toasted.success(result)
+          this.$router.push('/login')
         })
-        .catch((error) => {
-          this.$toasted.error(error.data.msg);
-        });
-    },
-  },
-};
+        .catch(error => {
+          this.$toasted.error(error.data.msg)
+        })
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -73,7 +73,7 @@ export default {
   height: 1000px;
 }
 #left {
-  background-image: url("../../assets/b-login.png");
+  background-image: url('../../assets/b-login.png');
   background-size: cover;
   background-repeat: no-repeat;
   height: 1000px;

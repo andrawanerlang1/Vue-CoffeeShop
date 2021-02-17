@@ -11,9 +11,9 @@
 
 <script>
 export default {
-  props: ["data", "income"],
-  methods: {},
-};
+  props: ['data', 'income'],
+  methods: {}
+}
 </script>
 
 <style scoped>

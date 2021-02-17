@@ -10,14 +10,14 @@
 </template>
 
 <script>
-import Footer from "../../components/_base/footer";
-import ResetPassword from "../../components/_base/ResetPassword";
+import Footer from '../../components/_base/footer'
+import ResetPassword from '../../components/_base/ResetPassword'
 
 export default {
-  name: "Login",
+  name: 'Login',
   components: {
     Footer,
-    ResetPassword,
-  },
-};
+    ResetPassword
+  }
+}
 </script>

@@ -167,84 +167,84 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapActions } from "vuex";
-import toastMixins from "../../mixins/toastMixins";
+import { mapGetters, mapActions } from 'vuex'
+import toastMixins from '../../mixins/toastMixins'
 
 export default {
-  name: "ProductDetail",
+  name: 'ProductDetail',
   data() {
     return {
-      history_payment: "cash",
+      history_payment: 'cash',
       subtotal: 0,
       tax: 0,
       shipping: 0,
       total: 0,
-      URL: process.env.VUE_APP_URL,
-    };
+      URL: process.env.VUE_APP_URL
+    }
   },
   mixins: [toastMixins],
   created() {
-    this.getTotal();
+    this.getTotal()
   },
   computed: {
     ...mapGetters({
-      cart: "getCart",
-      user: "setUser",
-      history_id: "getHistoryId",
-    }),
+      cart: 'getCart',
+      user: 'setUser',
+      history_id: 'getHistoryId'
+    })
   },
   methods: {
-    ...mapActions(["createHistory", "delCarts", "createHistoryDetail"]),
-    ...mapGetters(["getCart", "getHistoryId"]),
+    ...mapActions(['createHistory', 'delCarts', 'createHistoryDetail']),
+    ...mapGetters(['getCart', 'getHistoryId']),
     async handlePay() {
       const dataHistory = {
         history_subtotal: this.total,
         history_payment: this.history_payment,
-        user_id: this.user.user_id,
-      };
-      await this.createHistory(dataHistory);
-      for (let x = 0; x < this.cart.length; x++) {
-        this.createHistoryDetail(this.cart[x]);
+        user_id: this.user.user_id
       }
-      this.hideModal();
+      await this.createHistory(dataHistory)
+      for (let x = 0; x < this.cart.length; x++) {
+        this.createHistoryDetail(this.cart[x])
+      }
+      this.hideModal()
       this.toastMixins(
-        "Thankyou for your purchase",
-        "success",
-        "Payment Successfull"
-      );
-      this.delCarts();
+        'Thankyou for your purchase',
+        'success',
+        'Payment Successfull'
+      )
+      this.delCarts()
     },
     getTotal() {
       for (let x = 0; x < this.cart.length; x++) {
-        this.subtotal += this.cart[x].product_total;
+        this.subtotal += this.cart[x].product_total
       }
-      this.tax = this.subtotal * 0.1;
-      this.shipping = this.subtotal * 0.05;
-      this.total = this.subtotal + this.tax + this.shipping;
+      this.tax = this.subtotal * 0.1
+      this.shipping = this.subtotal * 0.05
+      this.total = this.subtotal + this.tax + this.shipping
       this.subtotal = this.subtotal
         .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-      this.tax = this.tax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+      this.tax = this.tax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
       this.shipping = this.shipping
         .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-      this.total = this.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-      return this.total;
+        .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+      this.total = this.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+      return this.total
     },
     showModal() {
-      this.$refs["my-modal"].show();
+      this.$refs['my-modal'].show()
     },
     hideModal() {
-      this.$refs["my-modal"].hide();
-    },
-  },
-};
+      this.$refs['my-modal'].hide()
+    }
+  }
+}
 </script>
 <style scoped>
 .flex-container.main {
   display: flex;
   flex-direction: row;
-  background-image: url("../../assets/bg1.png");
+  background-image: url('../../assets/bg1.png');
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -322,7 +322,7 @@ export default {
   text-align: right;
 }
 .kiri .line3 {
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-size: 20px;
   line-height: 30px;
   color: #362115;

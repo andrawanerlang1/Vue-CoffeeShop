@@ -184,52 +184,52 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data() {
     return {
-      product_id: "",
+      product_id: '',
       form: {
         size_choice: 0,
         deliver_id: 0,
-        quantity: null,
-      },
-    };
+        quantity: null
+      }
+    }
   },
   created() {
-    this.product_id = this.$route.params.id;
-    this.getProductById();
+    this.product_id = this.$route.params.id
+    this.getProductById()
   },
   computed: {
     ...mapGetters({
-      products: "getDataProductById",
-      user: "setUser",
-    }),
+      products: 'getDataProductById',
+      user: 'setUser'
+    })
   },
   methods: {
-    ...mapActions(["getProductsById", "deletesProduct", "addToCarts"]),
-    ...mapGetters(["getDataProductById"]),
+    ...mapActions(['getProductsById', 'deletesProduct', 'addToCarts']),
+    ...mapGetters(['getDataProductById']),
     getProductById() {
-      this.getProductsById(this.product_id);
+      this.getProductsById(this.product_id)
     },
     deleteProduct() {
-      this.deletesProduct(this.product_id);
-      this.$refs["my-modal"].hide();
-      this.toast3();
-      this.$router.push({ name: "Product" });
+      this.deletesProduct(this.product_id)
+      this.$refs['my-modal'].hide()
+      this.toast3()
+      this.$router.push({ name: 'Product' })
     },
     updateProduct(product_id) {
-      this.$router.push({ name: "Update", params: { id: product_id } });
+      this.$router.push({ name: 'Update', params: { id: product_id } })
     },
     addToCart(data) {
-      let totals = data.product_price * parseInt(this.form.quantity);
+      let totals = data.product_price * parseInt(this.form.quantity)
       if (!this.form.quantity) {
-        this.toast2("b-toaster-top-full", "Please input quantity");
+        this.toast2('b-toaster-top-full', 'Please input quantity')
       } else if (!this.form.size_choice) {
-        this.toast2("b-toaster-top-full", "Please input size choice");
+        this.toast2('b-toaster-top-full', 'Please input size choice')
       } else if (!this.form.deliver_id) {
-        this.toast2("b-toaster-top-full", "Please input delivery method");
+        this.toast2('b-toaster-top-full', 'Please input delivery method')
       } else {
         const setCart = {
           product_id: data.product_id,
@@ -239,47 +239,47 @@ export default {
           product_qty: this.form.quantity,
           product_size: this.form.size_choice,
           product_deliver: this.form.deliver_id,
-          product_total: totals,
-        };
-        this.addToCarts(setCart);
-        this.toast1("b-toaster-top-full");
+          product_total: totals
+        }
+        this.addToCarts(setCart)
+        this.toast1('b-toaster-top-full')
       }
     },
     toast1(toaster, append = false) {
-      this.$bvToast.toast("Product added to cart", {
-        title: "Success",
+      this.$bvToast.toast('Product added to cart', {
+        title: 'Success',
         toaster: toaster,
         solid: true,
-        variant: "success",
-        appendToast: append,
-      });
+        variant: 'success',
+        appendToast: append
+      })
     },
     toast2(toaster, msg, append = false) {
       this.$bvToast.toast(`${msg}`, {
-        title: "Warning",
+        title: 'Warning',
         toaster: toaster,
         solid: true,
-        variant: "warning",
-        appendToast: append,
-      });
+        variant: 'warning',
+        appendToast: append
+      })
     },
     toast3(toaster, append = false) {
-      this.$bvToast.toast("Product Deleted", {
-        title: "Success deletting product",
+      this.$bvToast.toast('Product Deleted', {
+        title: 'Success deletting product',
         toaster: toaster,
         solid: true,
-        variant: "warning",
-        appendToast: append,
-      });
+        variant: 'warning',
+        appendToast: append
+      })
     },
     showModal() {
-      this.$refs["my-modal"].show();
+      this.$refs['my-modal'].show()
     },
     hideModal() {
-      this.$refs["my-modal"].hide();
-    },
-  },
-};
+      this.$refs['my-modal'].hide()
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -356,7 +356,7 @@ export default {
   flex-direction: column;
 }
 .line2 .atas {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: bolder;
   font-size: 65px;
   line-height: 97px;

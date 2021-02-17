@@ -16,20 +16,20 @@
 </template>
 
 <script>
-import Navbar from "../components/_base/Navbar";
-import ProductCard from "../components/_base/ProductCard";
-import Coupon from "../components/_base/coupon";
-import Footer from "../components/_base/footer";
+import Navbar from '../components/_base/Navbar'
+import ProductCard from '../components/_base/ProductCard'
+import Coupon from '../components/_base/coupon'
+import Footer from '../components/_base/footer'
 
 export default {
-  name: "Product",
+  name: 'Product',
   components: {
     Navbar,
     ProductCard,
     Coupon,
-    Footer,
-  },
-};
+    Footer
+  }
+}
 </script>
 
 <style scoped>

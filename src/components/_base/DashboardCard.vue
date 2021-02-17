@@ -42,28 +42,28 @@
   </b-row>
 </template>
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      Days: "getSubtotalDays",
-      TotalOrder: "getTotalOrder",
-      Years: "getSubTotalYears",
-    }),
+      Days: 'getSubtotalDays',
+      TotalOrder: 'getTotalOrder',
+      Years: 'getSubTotalYears'
+    })
   },
   created() {
-    this.subTotaldays();
-    this.TotalOrdermonth();
-    this.subTotalYears();
+    this.subTotaldays()
+    this.TotalOrdermonth()
+    this.subTotalYears()
   },
   methods: {
-    ...mapActions(["subTotaldays", "TotalOrdermonth", "subTotalYears"]),
+    ...mapActions(['subTotaldays', 'TotalOrdermonth', 'subTotalYears']),
     formatPrice(value) {
-      const val = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-      return val;
-    },
-  },
-};
+      const val = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+      return val
+    }
+  }
+}
 </script>
 <style scoped>
 .todays_income {
@@ -85,7 +85,7 @@ export default {
   box-shadow: 6px 5px 10px #a179bf;
 }
 .data_income {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 .data_income h5 {
   font-size: 14px;

@@ -181,7 +181,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex'
 
 export default {
   data() {
@@ -191,34 +191,34 @@ export default {
       dine: 0,
       take: 0,
       form: {
-        product_name: "",
+        product_name: '',
         category_id: 0,
         start_id: 0,
         end_id: 0,
         product_price: null,
         product_stock: null,
-        product_desc: "",
+        product_desc: '',
         size_id: 1,
         deliver_id: 0,
         fav: 0,
-        product_image: null,
-      },
-    };
+        product_image: null
+      }
+    }
   },
   methods: {
-    ...mapActions(["uploadProduct"]),
+    ...mapActions(['uploadProduct']),
     chooseFile() {
-      document.getElementById("formInputImage").click();
+      document.getElementById('formInputImage').click()
     },
     handleFile(event) {
-      this.form.product_image = event.target.files[0];
+      this.form.product_image = event.target.files[0]
       this.url = URL.createObjectURL(
         (this.form.product_image = event.target.files[0])
-      );
-      const type = event.target.files[0].type;
-      if (type != "image/jpeg" && type != "image/png" && type != "image/jpg") {
-        this.form.product_image = "bukan image";
-        return this.toast3("b-toaster-top-full");
+      )
+      const type = event.target.files[0].type
+      if (type != 'image/jpeg' && type != 'image/png' && type != 'image/jpg') {
+        this.form.product_image = 'bukan image'
+        return this.toast3('b-toaster-top-full')
       }
     },
     postProduct() {
@@ -233,108 +233,108 @@ export default {
         !this.form.product_image ||
         !this.form.deliver_id
       ) {
-        return this.toast1("b-toaster-top-full");
-      } else if (this.form.product_image == "bukan image") {
-        return this.toast3("b-toaster-top-full");
+        return this.toast1('b-toaster-top-full')
+      } else if (this.form.product_image == 'bukan image') {
+        return this.toast3('b-toaster-top-full')
       } else {
         this.uploadProduct(this.form)
-          .then((result) => {
-            this.$toasted.success(result);
-            this.onReset();
+          .then(result => {
+            this.$toasted.success(result)
+            this.onReset()
           })
-          .catch((error) => {
-            this.$toasted.error(error);
-          });
+          .catch(error => {
+            this.$toasted.error(error)
+          })
       }
     },
     deliver(param) {
       if (param == 1) {
         if (this.home == 0) {
-          this.home = 1;
+          this.home = 1
         } else {
-          this.home = 0;
+          this.home = 0
         }
       } else if (param == 2) {
         if (this.dine == 0) {
-          this.dine = 1;
+          this.dine = 1
         } else {
-          this.dine = 0;
+          this.dine = 0
         }
       } else if (param == 3) {
         if (this.take == 0) {
-          this.take = 1;
+          this.take = 1
         } else {
-          this.take = 0;
+          this.take = 0
         }
       } else {
-        console.log(param);
+        console.log(param)
       }
-      this.calculateDeliver();
+      this.calculateDeliver()
     },
     calculateDeliver() {
       if (this.take && this.dine && this.home) {
-        this.form.deliver_id = 7;
+        this.form.deliver_id = 7
       } else if (this.take && this.dine) {
-        this.form.deliver_id = 6;
+        this.form.deliver_id = 6
       } else if (this.take && this.home) {
-        this.form.deliver_id = 5;
+        this.form.deliver_id = 5
       } else if (this.home && this.dine) {
-        this.form.deliver_id = 4;
+        this.form.deliver_id = 4
       } else if (this.take) {
-        this.form.deliver_id = 3;
+        this.form.deliver_id = 3
       } else if (this.dine) {
-        this.form.deliver_id = 2;
+        this.form.deliver_id = 2
       } else if (this.home) {
-        this.form.deliver_id = 1;
+        this.form.deliver_id = 1
       } else {
-        this.form.deliver_id = 0;
+        this.form.deliver_id = 0
       }
     },
     onReset() {
-      (this.home = 0),
+      ;(this.home = 0),
         (this.dine = 0),
         (this.take = 0),
         (this.form = {
-          product_name: "",
+          product_name: '',
           category_id: 0,
           start_id: 0,
           end_id: 0,
           product_price: null,
           product_stock: null,
-          product_desc: "",
+          product_desc: '',
           size_id: 1,
-          deliver_id: 0,
-        });
+          deliver_id: 0
+        })
     },
     toast1(toaster, append = false) {
-      this.$bvToast.toast("Please Input All data", {
-        title: "Warning",
+      this.$bvToast.toast('Please Input All data', {
+        title: 'Warning',
         toaster: toaster,
         solid: true,
-        variant: "warning",
-        appendToast: append,
-      });
+        variant: 'warning',
+        appendToast: append
+      })
     },
     toast2(toaster, append = false) {
-      this.$bvToast.toast("Product created successfully", {
-        title: "Success",
+      this.$bvToast.toast('Product created successfully', {
+        title: 'Success',
         toaster: toaster,
         solid: true,
-        variant: "success",
-        appendToast: append,
-      });
+        variant: 'success',
+        appendToast: append
+      })
     },
     toast3(toaster, append = false) {
-      this.$bvToast.toast("Uploaded picture must be PNG or JPEG format", {
-        title: "Warning",
+      this.$bvToast.toast('Uploaded picture must be PNG or JPEG format', {
+        title: 'Warning',
         toaster: toaster,
         solid: true,
-        variant: "warning",
-        appendToast: append,
-      });
-    },
-  },
-};
+        variant: 'warning',
+        appendToast: append
+      })
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -350,7 +350,7 @@ export default {
   margin-bottom: 30px;
 }
 #main {
-  font-family: "Rubik";
+  font-family: 'Rubik';
 }
 #right {
   width: 80%;

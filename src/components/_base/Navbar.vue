@@ -150,41 +150,41 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from "vuex";
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
-  name: "Navbar",
+  name: 'Navbar',
   data() {
     return {
-      user_id: "",
-    };
+      user_id: ''
+    }
   },
   computed: {
-    ...mapGetters({ user: "setUser" }),
+    ...mapGetters({ user: 'setUser' })
   },
   methods: {
-    ...mapActions(["logout", "delCarts"]),
-    ...mapMutations(["delMonthReport"]),
+    ...mapActions(['logout', 'delCarts']),
+    ...mapMutations(['delMonthReport']),
 
     handleLogout() {
-      this.delCarts();
-      this.logout();
-      this.delMonthReport();
+      this.delCarts()
+      this.logout()
+      this.delMonthReport()
     },
     editProfile(user_id) {
-      this.$router.push({ name: "EditProfile", params: { id: user_id } });
+      this.$router.push({ name: 'EditProfile', params: { id: user_id } })
     },
     showModalNav() {
-      this.$refs["nav-modal"].show();
+      this.$refs['nav-modal'].show()
     },
     showModalPost() {
-      this.$refs["post-modal"].show();
+      this.$refs['post-modal'].show()
     },
     hideModal() {
-      this.$refs["nav-modal"].hide();
-      this.$refs["post-modal"].hide();
-    },
-  },
-};
+      this.$refs['nav-modal'].hide()
+      this.$refs['post-modal'].hide()
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -203,7 +203,7 @@ export default {
 }
 #logout button {
   background-color: wheat;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 12px;
   border-radius: 12px;
   height: 30px;
@@ -215,7 +215,7 @@ export default {
   text-decoration: none;
 }
 .container-header {
-  font-family: "Rubik", sans-serif;
+  font-family: 'Rubik', sans-serif;
   background-color: white;
   padding: 20px;
   border-bottom: lightgray solid 3px;
